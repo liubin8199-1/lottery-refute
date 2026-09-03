@@ -3,6 +3,7 @@ window.SSQ_DATA = {
   "total": 213,
   "window": "2013001~2026101 共2059期（官方cwl全量数据）",
   "maxz": 2.504,
+  "updated": "2026-09-03",
   "reports": [
    {
     "title": "《双色球15条杀号公式》回测证伪",

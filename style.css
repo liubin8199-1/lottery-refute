@@ -67,4 +67,26 @@ footer{background:#0f1d33;color:#aebfd4;padding:30px 0;font-size:13px}
 footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
 .disc{font-size:12px;color:var(--sub);background:#fff;border:1px dashed var(--line);border-radius:12px;padding:14px 16px;margin-top:14px}
 input.search{width:100%;padding:10px 14px;border:1px solid var(--line);border-radius:10px;font-size:14px;margin-bottom:14px;background:#fff}
-@media(max-width:880px){.kpis{grid-template-columns:repeat(2,1fr)}.grid2,.grid3{grid-template-columns:1fr}.bar-name{width:140px}}
+/* 排序表头 */
+.th-sort{cursor:pointer;user-select:none;white-space:nowrap}
+.th-sort:hover{color:var(--brand)}
+.th-sort .arr{font-size:10px;color:var(--brand)}
+/* |z| 直方图 */
+.zchart{margin-top:6px}
+.zc-plot{position:relative;padding:18px 8px 4px;background:#fafcff;border:1px solid var(--line);border-radius:12px}
+.zc-cols{display:flex;align-items:flex-end;gap:10px;height:200px}
+.zc-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.zc-bar{width:100%;max-width:54px;background:linear-gradient(180deg,#3a86ff,#1f6feb);border-radius:6px 6px 0 0;position:relative;min-height:2px;transition:height .4s}
+.zc-bar.zc-zero{background:#dfe7f1;height:2px!important}
+.zc-n{position:absolute;top:-20px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink)}
+.zc-x{margin-top:8px;font-size:12px;color:var(--sub);text-align:center}
+.zc-thresh{position:absolute;top:8px;bottom:30px;width:0;border-left:2px dashed var(--red);z-index:3}
+.zc-thresh span{position:absolute;top:-2px;left:6px;white-space:nowrap;font-size:12px;font-weight:700;color:var(--red);background:rgba(255,255,255,.85);padding:1px 4px;border-radius:4px}
+.zchart-foot{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;margin-top:12px;font-size:13px;color:var(--sub)}
+.zchart-foot .mk{display:inline-block;width:18px;height:0;border-top:2px dashed var(--red);vertical-align:middle;margin-right:6px}
+/* 已知结论小卡 */
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.fact{background:#fafcff;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.fact b{display:block;font-size:15px;color:var(--brand)}
+.fact span{font-size:12.5px;color:var(--sub)}
+@media(max-width:880px){.kpis{grid-template-columns:repeat(2,1fr)}.grid2,.grid3{grid-template-columns:1fr}.bar-name{width:140px}.facts{grid-template-columns:1fr}.zc-cols{gap:5px}.zc-x{font-size:10px}}
