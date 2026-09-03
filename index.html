@@ -175,24 +175,54 @@
 
   <!-- 福彩3D -->
   <section id="d3">
-    <h2>福彩 3D <span class="tag">结论已核实 · 详表同步中</span></h2>
+    <h2>福彩 3D <span class="tag">已证伪 27 法 · 全量 4696 期</span></h2>
+    <p class="sub">数据源：官方历史开奖库全量 4696 期（2013002~2026201）。27 条杀号 / 取胆 / 选号 / 缩水方法全量或样本外回测，<b>0 条</b>过 Bonferroni 阈值（|z|≥<span id="d3Thresh">3.11</span>）。</p>
+
     <div class="grid2">
+      <div class="card" id="d3Scale"></div>
       <div class="card">
-        <h3 style="margin-top:0">已覆盖的方法类型</h3>
-        <p class="muted">杀号法、直选/组选冷热、和值跨度、奇偶大小、对子/连号、试机号参考系、各类"独胆/必出"秘籍。与双色球同款回测引擎（一期前瞻 + 随机基线 + Bonferroni）。</p>
-        <div class="method"><div class="big">4696</div><div class="cap">期全量开奖（已接入分析管线）</div></div>
+        <h3 style="margin-top:0">代表报告（全量 / 样本外）</h3>
+        <ul id="d3Reports" style="margin:0;padding-left:18px"></ul>
       </div>
-      <div class="card">
-        <h3 style="margin-top:0">当前状态</h3>
-        <p><span class="badge b-green">已核实</span> 下列结论已从主分析系统全量回测核实；逐条证伪索引 JSON 与报告表将在源数据接入后补齐。</p>
-        <div class="facts">
-          <div class="fact"><b>4696 期</b><span>福彩3D 全量开奖已接入分析管线</span></div>
-          <div class="fact"><b>杀号法 ≈ 随机</b><span>样本外表现全部 ≤ 随机基线</span></div>
-          <div class="fact"><b>试机号独立</b><span>与开奖号无任何可预测关联</span></div>
-          <div class="fact"><b>独胆/必出</b><span>全量检验均不成立</span></div>
-        </div>
-        <div class="note" style="margin-top:14px"><b>为什么不编造数字？</b> 3D 全量证伪的原始索引存放于另一套分析系统，本站点只展示已正式核实并同步过的数据，避免"看起来很全实则未校验"的伪精确。</div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h3 style="margin-top:0">显著性检验全景：27 条方法的 |z| 落点</h3>
+      <p class="muted" style="font-size:13px">横轴是按 |z| 分桶的方法条数，竖虚线是 Bonferroni 显著性阈值。3D 的"杀 1 个数字"基线是 90%（单位置）/ 72.9%（三位数），取胆 3 码 65.7%、1D 单胆 27.1%；<b>全部 27 条都落在阈值左侧</b>。</p>
+      <div id="d3zChart" class="zchart"></div>
+      <div class="zchart-foot">
+        <span><span class="mk"></span>显著阈值 |z|≥<span id="d3Thresh2">3.11</span>（0 条越过）</span>
+        <span class="mono">max|z| = <span id="d3Maxz">2.414</span></span>
       </div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h3 style="margin-top:0">可检索证伪档案（27 条）</h3>
+      <p class="muted" style="font-size:13px">"实测 / 基线"为该方法的正确率（杀号=杀对率，取胆选号=命中率）；lift &gt; 1 才优于随机；|z| 为对随机基线的标准化偏离。<b>全部 = 随机。</b></p>
+      <input class="search" id="q3" placeholder="搜索公式 / 类别，如：合值、冷号、追冷、共振 …">
+      <div class="chips" id="catChips3"></div>
+      <div style="max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:12px">
+        <table id="tbl3">
+          <thead><tr>
+            <th class="th-sort" data-sort="cat" style="width:150px">类别 <span class="arr"></span></th>
+            <th class="th-sort" data-sort="formula">公式 / 方法 <span class="arr"></span></th>
+            <th class="th-sort" data-sort="hit" style="width:72px">实测 <span class="arr"></span></th>
+            <th class="th-sort" data-sort="base" style="width:72px">基线 <span class="arr"></span></th>
+            <th class="th-sort" data-sort="lift" style="width:70px">lift <span class="arr"></span></th>
+            <th class="th-sort" data-sort="z" style="width:70px">|z| <span class="arr"></span></th>
+            <th class="th-sort" data-sort="verdict" style="width:88px">判定 <span class="arr"></span></th>
+          </tr></thead>
+          <tbody id="tbody3"></tbody>
+        </table>
+      </div>
+      <div class="disc" id="rowCount3"></div>
+    </div>
+
+    <div class="callout" style="margin-top:18px">
+      <b>唯一"看起来有点东西"的一条：追冷号（|z| = 2.414，lift = 1.065）。</b>
+      我们额外做了 300 次置换检验（打乱开奖顺序重算 6 策略，构建零分布）：真实最佳偏离 +1.765pp，在零分布中 <span class="mono">p = 0.040</span>。
+      这是<b>边缘显著</b>——略强于纯噪声，但经 Bonferroni 校正（27 条同检）后远不显著，且无机制解释（上期与下期独立）。
+      <b>我们不把它当作规律，也不下注；如实列出，供你自行判断这个 p 值意味着什么。</b>
     </div>
   </section>
 
@@ -264,7 +294,7 @@
       <ul style="margin:0;padding-left:20px;line-height:2">
         <li><b>双色球：</b>213 条杀号/预测方法全量一期前瞻回测，<b>0 条</b>越过 Bonferroni 阈值（max|z| = 2.504 &lt; ≈3.1）。数据源：官方 cwl 全量 2059 期。</li>
         <li><b>可视化：</b>|z| 显著性直方图、方法分类分布条、可检索 213 条证伪档案表（支持关键词搜索 + 表头排序）。</li>
-        <li><b>福彩 3D：</b>已核实结论（4696 期全量 / 杀号法≈随机 / 试机号独立 / 独胆必出）已上卡，逐条详表同步中。</li>
+        <li><b>福彩 3D：</b>27 条杀号/取胆/选号/缩水方法全量或样本外回测，<b>0 条</b>越过 Bonferroni 阈值（max|z| = 2.414 &lt; 3.11）。数据源：官方历史开奖库全量 4696 期。</li>
         <li><b>六合彩（澳门）：</b>已核实结论（686 公式 OOS 证伪 / 平肖 p=0.765 / 开奖≈iid / 生肖盲区）已上卡，逐条详表同步中。</li>
         <li><b>部署：</b>GitHub Pages 公开上线，含 OG 分享元信息与仓库链接；所有数字均来自已核实回测，不编造未校验数据。</li>
       </ul>
@@ -289,6 +319,7 @@
 
 <script src="data/draws.js"></script>
 <script src="data/ssq.js"></script>
+<script src="data/fc3d.js"></script>
 <script>
 (function(){
   var D = window.SSQ_DATA;
