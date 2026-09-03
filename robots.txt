@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://liubin8199-1.github.io/lottery-refute/sitemap.xml
