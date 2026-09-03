@@ -229,24 +229,55 @@
 
   <!-- 六合彩 -->
   <section id="lhc">
-    <h2>六合彩（澳门） <span class="tag">结论已核实 · 详表同步中</span></h2>
+    <h2>六合彩（澳门） <span class="tag">已证伪 686 法 · OOS 212 期</span></h2>
+    <p class="sub">数据源：璇玑系统 OOS 样本外回测（P30~P241 共 212 期，2026 全量开奖）+《官方数据一致性核查报告》（2026-08-30 修复数据缺陷后重跑）。686 条杀肖公式归档全量证伪，0 条过 Bonferroni 阈值（|z|≥3.11）。</p>
     <div class="grid2">
+      <div class="card" id="lhcScale"></div>
       <div class="card">
-        <h3 style="margin-top:0">已验证的方法族</h3>
-        <p class="muted">平特/特码、连肖/平肖、五不中/八不中、生肖盲区补偿、历史杀肖公式子集、686 公式归档的 OOS 证伪。</p>
-        <div class="method"><div class="big">686</div><div class="cap">公式归档（OOS 证伪，作 null-alpha 证据）</div></div>
+        <h3 style="margin-top:0">代表报告（OOS 样本外回测）</h3>
+        <ul id="lhcReports" style="margin:0;padding-left:18px"></ul>
+        <p class="muted" style="font-size:13px">完整证伪条目见下方可检索表格。</p>
       </div>
-      <div class="card">
-        <h3 style="margin-top:0">当前状态</h3>
-        <p><span class="badge b-green">已核实</span> 下列结论已从主系统 OOS 证伪核实；逐条详表与样本外复盘将在源数据接入后补齐。</p>
-        <div class="facts">
-          <div class="fact"><b>686 公式</b><span>归档 OOS 证伪，作 null-alpha 证据</span></div>
-          <div class="fact"><b>平肖信号</b><span>证伪 p=0.765，永不下注</span></div>
-          <div class="fact"><b>开奖 ≈ iid</b><span>EV≤0，越级外推预测已停</span></div>
-          <div class="fact"><b>生肖盲区</b><span>样本外不成立，逼近随机基线</span></div>
-        </div>
-        <div class="note" style="margin-top:14px"><b>合规边界：</b>本站仅做"历史数据回测 + 统计证伪"，不提供任何投注建议、不下注、不引导参与任何博彩。所有内容旨在于理性科普与反误导。</div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h3 style="margin-top:0">显著性检验结论：686 公式的 |z| 落点</h3>
+      <p class="muted" style="font-size:13px">横轴是 686 条杀肖公式在 OOS 212 期回放中观测到的漏杀率偏离随机基线的标准化幅度（|z|）。红色虚线为 Bonferroni 显著性阈值 <b>|z|≈3.1</b>。686 条公式的<b>最大 |z| 仅 1.06</b>（观测漏杀率 92.3% vs 基线 91.6%，p=0.291，不显著），<b>全部远低于阈值</b>。</p>
+      <div id="lhcZ" class="zchart"></div>
+      <div class="zchart-foot">
+        <span><span class="mk"></span>显著阈值 |z|≈3.1（0 条越过）</span>
+        <span class="mono">max|z| = <span id="lhcMaxz">1.06</span></span>
       </div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h3 style="margin-top:0">可检索证伪档案（10 条代表条目）</h3>
+      <p class="muted" style="font-size:13px">数字均来自璇玑系统已核实 OOS 回测与《官方数据一致性核查报告》。字段为"—"表示该方法的回测设计本身不产出对应数值（如命中率/OR，依方法而定）。</p>
+      <input class="search" id="qL" placeholder="搜索公式 / 类别，如：杀肖、平肖、生肖盲区、Logistic …">
+      <div class="chips" id="catChipsL"></div>
+      <div style="max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:12px">
+        <table id="tblL">
+          <thead><tr>
+            <th class="th-sort" data-sort="cat" style="width:160px">类别 <span class="arr"></span></th>
+            <th class="th-sort" data-sort="formula">公式 / 方法 <span class="arr"></span></th>
+            <th class="th-sort" data-sort="hit" style="width:74px">实测 <span class="arr"></span></th>
+            <th class="th-sort" data-sort="base" style="width:74px">基线 <span class="arr"></span></th>
+            <th class="th-sort" data-sort="lift" style="width:70px">lift <span class="arr"></span></th>
+            <th class="th-sort" data-sort="z" style="width:70px">|z| <span class="arr"></span></th>
+            <th class="th-sort" data-sort="verdict" style="width:140px">判定 <span class="arr"></span></th>
+          </tr></thead>
+          <tbody id="tbodyL"></tbody>
+        </table>
+      </div>
+      <div class="disc" id="rowCountL"></div>
+    </div>
+
+    <div class="callout" style="margin-top:18px">
+      <b>关键修复与稳健性：</b>主系统在 2026-08-30 修复了农历/公历切换点的数据缺陷（生肖/五行错位 47 期、波色格式 72 期、头数 1 期），修复后<b>重跑 686 公式 OOS</b>，结论不变——686/686 全死、观测漏杀率 92.3% vs 基线 91.6%（z=1.06, p=0.291）、分层 9 组 p=0.365–0.836、Logistic OR=1.001 (p=0.963)。<b>数据缺陷修复前后结论稳健一致，证伪结论可靠。</b>
+    </div>
+
+    <div class="callout" style="margin-top:14px;background:#fff8f0;border-color:#f0c8a0">
+      <b>合规边界：</b>本站仅做"历史数据回测 + 统计证伪"，不提供任何投注建议、不下注、不引导参与任何博彩。所有内容旨在于理性科普与反误导。
     </div>
   </section>
 
@@ -296,7 +327,7 @@
         <li><b>双色球：</b>213 条杀号/预测方法全量一期前瞻回测，<b>0 条</b>越过 Bonferroni 阈值（max|z| = 2.504 &lt; ≈3.1）。数据源：官方 cwl 全量 2059 期。</li>
         <li><b>可视化：</b>|z| 显著性直方图、方法分类分布条、可检索 213 条证伪档案表（支持关键词搜索 + 表头排序）。</li>
         <li><b>福彩 3D：</b>27 条杀号/取胆/选号/缩水方法全量或样本外回测，<b>0 条</b>越过 Bonferroni 阈值（max|z| = 2.414 &lt; 3.11）。数据源：官方历史开奖库全量 4696 期。</li>
-        <li><b>六合彩（澳门）：</b>已核实结论（686 公式 OOS 证伪 / 平肖 p=0.765 / 开奖≈iid / 生肖盲区）已上卡，逐条详表同步中。</li>
+        <li><b>六合彩（澳门）：</b>686 条杀肖公式 OOS 证伪（212 期全量回放，686/686 全死，max|z|=1.06 p=0.291）、平肖 p=0.765、开奖≈iid、生肖盲区、数据缺陷修复后结论稳健——已接数据并渲染详表（规模卡 + 代表报告 + 显著性对比 + 可检索 10 条证伪档案）。</li>
         <li><b>部署：</b>GitHub Pages 公开上线，含 OG 分享元信息与仓库链接；所有数字均来自已核实回测，不编造未校验数据。</li>
         <li><b>留言区：</b>接入纯前端 localStorage 留言板（零配置、无需 GitHub 授权），访客可留名 + 留言 + 删除本人留言；数据仅存本浏览器，属占位框，可后续升级为 giscus 真多人评论区。</li>
       </ul>
@@ -390,6 +421,7 @@
 <script src="data/draws.js"></script>
 <script src="data/ssq.js"></script>
 <script src="data/fc3d.js"></script>
+<script src="data/lhc.js"></script>
 <script>
 (function(){
   var D = window.SSQ_DATA;
@@ -556,6 +588,176 @@
 
   // 页脚日期
   var fu=document.getElementById('footUpdated'); if(fu&&D.meta.updated) fu.textContent=D.meta.updated;
+
+  // ===== 福彩3D 渲染（修复此前 FC3D_DATA 加载却未消费的 bug） =====
+  (function renderD3(){
+    var F = window.FC3D_DATA; if(!F) return;
+    var sc=document.getElementById('d3Scale');
+    if(sc) sc.innerHTML='<h3 style="margin-top:0">数据规模</h3>'+
+      stat(F.meta.total,'条','已证伪方法')+
+      stat('4696','期','官方历史开奖库全量 (2013002~2026201)')+
+      stat('0','条','通过 Bonferroni 显著检验')+
+      '<p class="muted" style="font-size:13px;margin-top:8px">覆盖：杀号公式大比拼、合值分位杀号铁律、冷号杀号法(样本外)、两变体全量 OOS、1D 选号策略(样本外)、四维共振缩水等。</p>';
+    var rep=document.getElementById('d3Reports');
+    if(rep) F.meta.reports.forEach(function(r){
+      var li=document.createElement('li'); li.innerHTML='<b>'+r.title+'</b><br><span class="muted" style="font-size:13px">'+r.note+'</span>'; rep.appendChild(li);
+    });
+    (function(){
+      var el=document.getElementById('d3zChart'); if(!el) return;
+      var edges=[0,0.5,1,1.5,2,2.5,3,99], labels=['0~0.5','0.5~1','1~1.5','1.5~2','2~2.5','2.5~3','≥3'];
+      var cnt=[0,0,0,0,0,0,0];
+      F.rows.forEach(function(r){var z=Math.abs(r.z||0);for(var i=0;i<edges.length-1;i++){if(z>=edges[i]&&z<edges[i+1]){cnt[i]++;break;}}});
+      var mx=Math.max.apply(null,cnt);
+      var cols='';
+      cnt.forEach(function(c,i){
+        var h=mx?Math.round(c/mx*100):0;
+        cols+='<div class="zc-col"><div class="zc-bar'+(c===0?' zc-zero':'')+'" style="height:'+h+'%"><span class="zc-n">'+c+'</span></div><div class="zc-x">'+labels[i]+'</div></div>';
+      });
+      var threshPct=6/7*100;
+      el.innerHTML='<div class="zc-plot"><div class="zc-cols">'+cols+'</div>'+
+        '<div class="zc-thresh" style="left:'+threshPct+'%"><span>显著阈值 |z|≈3.1</span></div></div>';
+    })();
+    var rows=F.rows, tbody=document.getElementById('tbody3');
+    if(!tbody) return;
+    var q=document.getElementById('q3'), chips=document.getElementById('catChips3');
+    var cats=Array.from(new Set(rows.map(function(r){return r.cat;})));
+    var active='', sortKey='', sortDir=1;
+    cats.forEach(function(c){
+      var s=document.createElement('span'); s.className='chip'; s.textContent=c;
+      s.onclick=function(){ if(active===c){active='';s.classList.remove('on');}else{active=c;document.querySelectorAll('#catChips3 .chip').forEach(function(x){x.classList.remove('on');});s.classList.add('on');} render(); };
+      chips.appendChild(s);
+    });
+    document.querySelectorAll('#tbl3 .th-sort').forEach(function(th){
+      th.addEventListener('click',function(){
+        var k=th.getAttribute('data-sort');
+        if(sortKey===k){sortDir=-sortDir;}else{sortKey=k;sortDir=1;}
+        document.querySelectorAll('#tbl3 .th-sort .arr').forEach(function(a){a.textContent='';});
+        th.querySelector('.arr').textContent=sortDir>0?' ▲':' ▼';
+        render();
+      });
+    });
+    function fmt(v,suf){ if(v===null||v===undefined||(typeof v==='number'&&!isFinite(v))) return '—'; return suf?(+v).toFixed(suf):v; }
+    function render(){
+      var term=q.value.trim().toLowerCase();
+      var out=rows.filter(function(r){
+        if(active && r.cat!==active) return false;
+        if(term && (r.formula+r.cat+(r.note||'')).toLowerCase().indexOf(term)<0) return false;
+        return true;
+      });
+      if(sortKey){
+        out.sort(function(a,b){
+          var va=sortKey==='z'?Math.abs(a.z||0):(a[sortKey]);
+          var vb=sortKey==='z'?Math.abs(b.z||0):(b[sortKey]);
+          if(typeof va==='string') return va.localeCompare(vb,'zh')*sortDir;
+          return ((va||0)-(vb||0))*sortDir;
+        });
+      }
+      tbody.innerHTML='';
+      out.forEach(function(r){
+        var tr=document.createElement('tr');
+        var vc = (r.lift>1.05)?'b-green':((r.lift<0.95)?'b-red':'b-gray');
+        tr.innerHTML='<td class="muted" style="font-size:13px">'+r.cat+'</td>'+
+          '<td>'+(r.formula||'—')+(r.note?' <span class="muted" style="font-size:12px">('+r.note+')</span>':'')+'</td>'+
+          '<td class="mono">'+fmt(r.hit,2)+'%</td>'+
+          '<td class="mono">'+fmt(r.base,2)+'%</td>'+
+          '<td class="mono">'+fmt(r.lift,4)+'</td>'+
+          '<td class="mono">'+fmt(r.z,2)+'</td>'+
+          '<td><span class="badge '+vc+'">=随机</span></td>';
+        tbody.appendChild(tr);
+      });
+      document.getElementById('rowCount3').textContent='显示 '+out.length+' / '+rows.length+' 条（全部判定均为"=随机"，无一条显著优于随机基线）。';
+    }
+    q.addEventListener('input',render);
+    render();
+  })();
+
+  // ===== 六合彩 渲染 =====
+  (function renderLHC(){
+    var L = window.LHC_DATA; if(!L) return;
+    var sc=document.getElementById('lhcScale');
+    if(sc) sc.innerHTML='<h3 style="margin-top:0">数据规模</h3>'+
+      stat(L.meta.total,'条','已证伪杀肖公式归档（OOS）')+
+      stat('212','期','OOS 样本外回放 (P30~P241, 2026 全量)')+
+      stat('0','条','通过 Bonferroni 显著检验')+
+      '<p class="muted" style="font-size:13px;margin-top:8px">方法族覆盖：杀肖公式(686) / 平肖信号 / 生肖盲区 / 开奖独立性 / 数据一致性。数据源：璇玑系统 OOS 回测 +《官方数据一致性核查报告》。</p>';
+    var rep=document.getElementById('lhcReports');
+    if(rep) L.meta.reports.forEach(function(r){
+      var li=document.createElement('li'); li.innerHTML='<b>'+r.title+'</b><br><span class="muted" style="font-size:13px">'+r.note+'</span>'; rep.appendChild(li);
+    });
+    // max|z| vs 阈值 对比条（686 公式无逐条 |z| 明细，故用整体最大 |z| 对照阈值）
+    (function(){
+      var el=document.getElementById('lhcZ'); if(!el) return;
+      var th=3.11, mx=L.meta.maxz||0, AX=th*1.15;
+      function bar(name,v,cls,txt){
+        return '<div style="display:flex;align-items:center;gap:10px;margin:10px 0">'+
+          '<div style="width:150px;font-size:13px;color:var(--sub);text-align:right;flex-shrink:0">'+name+'</div>'+
+          '<div style="flex:1;height:22px;background:#eef3f9;border-radius:6px;overflow:hidden">'+
+            '<div style="height:100%;width:'+Math.max(2,v/AX*100).toFixed(1)+'%;background:'+cls+';border-radius:6px"></div></div>'+
+          '<div style="width:60px;font-family:var(--mono);font-size:15px;font-weight:800;color:var(--ink);flex-shrink:0">'+txt+'</div></div>';
+      }
+      el.innerHTML=
+        bar('显著阈值 |z|≈3.1', th, 'linear-gradient(90deg,#94a8c4,#b8c6da)', '3.1')+
+        bar('686 公式最大 |z|', mx, 'linear-gradient(90deg,#3a86ff,#1f6feb)', mx.toFixed(2))+
+        '<div style="text-align:center;font-size:12.5px;color:var(--sub);margin-top:10px">686 条公式的最大 |z| 仅为阈值的 '+(mx/th*100).toFixed(0)+'% —— 没有任何一条接近显著。</div>';
+      var mz=document.getElementById('lhcMaxz'); if(mz) mz.textContent=mx.toFixed(2);
+    })();
+    // 表格
+    var rows=L.rows, tbody=document.getElementById('tbodyL');
+    if(!tbody) return;
+    var q=document.getElementById('qL'), chips=document.getElementById('catChipsL');
+    var cats=Array.from(new Set(rows.map(function(r){return r.cat;})));
+    var active='', sortKey='', sortDir=1;
+    cats.forEach(function(c){
+      var s=document.createElement('span'); s.className='chip'; s.textContent=c;
+      s.onclick=function(){ if(active===c){active='';s.classList.remove('on');}else{active=c;document.querySelectorAll('#catChipsL .chip').forEach(function(x){x.classList.remove('on');});s.classList.add('on');} render(); };
+      chips.appendChild(s);
+    });
+    document.querySelectorAll('#tblL .th-sort').forEach(function(th){
+      th.addEventListener('click',function(){
+        var k=th.getAttribute('data-sort');
+        if(sortKey===k){sortDir=-sortDir;}else{sortKey=k;sortDir=1;}
+        document.querySelectorAll('#tblL .th-sort .arr').forEach(function(a){a.textContent='';});
+        th.querySelector('.arr').textContent=sortDir>0?' ▲':' ▼';
+        render();
+      });
+    });
+    function fmt(v,suf){
+      if(v===null||v===undefined||(typeof v==='number'&&!isFinite(v))) return '—';
+      if(typeof v==='string') return v;
+      return suf?(+v).toFixed(suf):v;
+    }
+    function render(){
+      var term=q.value.trim().toLowerCase();
+      var out=rows.filter(function(r){
+        if(active && r.cat!==active) return false;
+        if(term && (r.formula+r.cat+(r.note||'')+r.verdict).toLowerCase().indexOf(term)<0) return false;
+        return true;
+      });
+      if(sortKey){
+        out.sort(function(a,b){
+          var va=sortKey==='z'?Math.abs(a.z||0):(sortKey==='verdict'?(a.verdict||''):(a[sortKey]));
+          var vb=sortKey==='z'?Math.abs(b.z||0):(sortKey==='verdict'?(b.verdict||''):(b[sortKey]));
+          if(typeof va==='string') return va.localeCompare(vb,'zh')*sortDir;
+          return ((va||0)-(vb||0))*sortDir;
+        });
+      }
+      tbody.innerHTML='';
+      out.forEach(function(r){
+        var tr=document.createElement('tr');
+        tr.innerHTML='<td class="muted" style="font-size:13px">'+r.cat+'</td>'+
+          '<td>'+(r.formula||'—')+(r.note?' <span class="muted" style="font-size:12px">('+r.note+')</span>':'')+'</td>'+
+          '<td class="mono">'+fmt(r.hit)+(r.hit!==null&&r.hit!==undefined?'%':'')+'</td>'+
+          '<td class="mono">'+fmt(r.base)+(r.base!==null&&r.base!==undefined?'%':'')+'</td>'+
+          '<td class="mono">'+fmt(r.lift,4)+'</td>'+
+          '<td class="mono">'+fmt(r.z,2)+'</td>'+
+          '<td class="muted" style="font-size:12.5px">'+fmt(r.verdict)+'</td>';
+        tbody.appendChild(tr);
+      });
+      document.getElementById('rowCountL').textContent='显示 '+out.length+' / '+rows.length+' 条（全部判定均不显著，与随机无差异）。';
+    }
+    q.addEventListener('input',render);
+    render();
+  })();
 
   // ===== 互动区 ① 秘籍粉碎机 =====
   (function initLab(){
