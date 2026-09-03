@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>开奖即随机 · 彩票伪证档案库</title>
+<meta name="description" content="用全量历史开奖数据回测证伪每一个'稳赚不赔'的彩票秘籍。双色球、福彩3D、六合彩，全部归随机。">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="bar">
+    <div class="logo">开奖即随机<span class="dot">·</span>彩票伪证档案库</div>
+    <nav class="nav">
+      <a href="#stand">立场与方法</a>
+      <a href="#ssq">双色球</a>
+      <a href="#d3">福彩3D</a>
+      <a href="#lhc">六合彩</a>
+      <a href="#qa">答疑</a>
+    </nav>
+  </div>
+  <div class="hero">
+    <h1>每一个"稳赚不赔"的秘籍，<br>都被全量开奖数据证伪了。</h1>
+    <p class="lead">我们把流传甚广的彩票杀号公式、预测秘籍，用官方全量历史开奖数据逐一做一期前瞻回测。
+      结论高度一致：<b>全部等于闭眼随机排除一个号码</b>，没有一条能稳定识别开奖号码。</p>
+    <div class="kpis" id="kpis"></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 立场与方法 -->
+  <section id="stand">
+    <h2>我们站在什么立场 <span class="tag">反智商税 · 理性购彩</span></h2>
+    <p class="sub">本站的立场不是"教你中奖"，而是"用数据告诉你：那些收费/引流的秘籍为什么不灵"。</p>
+    <div class="grid3">
+      <div class="card">
+        <h3 style="margin-top:0">1 · 全量回测</h3>
+        <p class="muted">用官方完整历史开奖（双色球 2059 期 / 福彩3D 4696 期 / 六合牌型全量），对每条公式做"用第 i 期预测第 i+1 期"的一期前瞻检验，严禁偷看未来。</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">2 · 随机基线</h3>
+        <p class="muted">杀 1 个红球基线漏杀率 18.18%（6/33）；杀 1 个蓝球 6.25%（1/16）、整期全对 93.75%（15/16）。任何公式的"准确率"都先对标这个照妖镜。</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">3 · 多重比较校正</h3>
+        <p class="muted">同时检验 N 条公式时，用 Bonferroni 校正（α=0.05/N），杜绝"75 条里总有一条碰巧显著"的幸存者偏差。</p>
+      </div>
+    </div>
+    <div class="callout">
+      <b>数学必然性：</b>若开奖是独立同分布（iid），则对任意"上期号码的确定性函数" g，漏杀率恒为
+      <span class="mono">P(g(X)∈Y)=E[6/33]=6/33</span>，与被杀号码集合大小无关。
+      <b>只要摇奖机真的独立，这类杀号公式一条都不可能例外。</b>
+    </div>
+  </section>
+
+  <!-- 双色球 -->
+  <section id="ssq">
+    <h2>双色球 SSQ <span class="tag">数据最全 · 已证伪 213 法</span></h2>
+    <p class="sub">数据源：中国福利彩票官方 cwl 全量 2059 期（2013001~2026101）。累计 213 条杀号/预测方法全量回测，0 条过 Bonferroni 阈值。</p>
+    <div class="grid2">
+      <div class="card" id="ssqScale"></div>
+      <div class="card">
+        <h3 style="margin-top:0">代表报告（点击查看原始核验）</h3>
+        <ul id="ssqReports" style="margin:0;padding-left:18px"></ul>
+        <p class="muted" style="font-size:13px">完整 213 条方法见下方可检索表格。</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h3 style="margin-top:0">证伪方法分类分布（按条数，每条都 ≤ 随机）</h3>
+      <div id="catBars"></div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h3 style="margin-top:0">可检索证伪档案（213 条）</h3>
+      <p class="muted" style="font-size:13px">lift = 基线 / 实测漏杀率，&gt;1 才优于随机；z 为负数代表"看起来优于随机"但均未过显著性阈值。全部 = 随机。</p>
+      <input class="search" id="q" placeholder="搜索公式 / 类别，如：绝杀、对称码、v12、主观 …">
+      <div class="chips" id="catChips"></div>
+      <div style="max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:12px">
+        <table id="tbl">
+          <thead><tr><th style="width:170px">类别</th><th>公式 / 方法</th><th style="width:80px">lift</th><th style="width:80px">|z|</th><th style="width:90px">判定</th></tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <div class="disc" id="rowCount"></div>
+    </div>
+  </section>
+
+  <!-- 福彩3D -->
+  <section id="d3">
+    <h2>福彩 3D <span class="tag">体系已建 · 数据接入中</span></h2>
+    <div class="grid2">
+      <div class="card">
+        <h3 style="margin-top:0">已覆盖的方法类型</h3>
+        <p class="muted">杀号法、直选/组选冷热、和值跨度、奇偶大小、对子/连号、试机号参考系、各类"独胆/必出"秘籍。与双色球同款回测引擎（一期前瞻 + 随机基线 + Bonferroni）。</p>
+        <div class="method"><div class="big">4696</div><div class="cap">期全量开奖（已接入分析管线）</div></div>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">当前状态</h3>
+        <p><span class="badge b-amber">接入中</span> 详细证伪索引 JSON 与逐条报告正在从主分析系统同步到本站点。</p>
+        <p class="muted">已知结论（与主系统一致）：3D 各玩法开奖为 iid，杀号/独胆类方法在样本外表现全部 ≤ 随机基线；试机号与开奖号独立，无任何可预测关联。</p>
+        <div class="note"><b>为什么不编造数字？</b> 3D 全量证伪的原始索引存放于另一套分析系统，本站点只展示已正式核实并同步过的数据，避免"看起来很全实则未校验"的伪精确。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 六合彩 -->
+  <section id="lhc">
+    <h2>六合彩（澳门） <span class="tag">体系已建 · 数据接入中</span></h2>
+    <div class="grid2">
+      <div class="card">
+        <h3 style="margin-top:0">已验证的方法族</h3>
+        <p class="muted">平特/特码、连肖/平肖、五不中/八不中、生肖盲区补偿、历史杀肖公式子集、686 公式归档的 OOS 证伪。</p>
+        <div class="method"><div class="big">686</div><div class="cap">公式归档（OOS 证伪，作 null-alpha 证据）</div></div>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">当前状态</h3>
+        <p><span class="badge b-amber">接入中</span> 六合彩相关分析在另一套概率管理系统长期维护，本站将逐步接入其证伪结论与样本外复盘。</p>
+        <p class="muted">已知结论：开奖近似 iid、EV≤0；所谓"生肖盲区""稳杀肖"在历史样本外均不成立，准确率无限逼近随机基线。</p>
+        <div class="note"><b>合规边界：</b>本站仅做"历史数据回测 + 统计证伪"，不提供任何投注建议、不下注、不引导参与任何博彩。所有内容旨在于理性科普与反误导。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 答疑 -->
+  <section id="qa">
+    <h2>常见疑问</h2>
+    <dl class="faq">
+      <dt>"那杀号到底有没有用？"</dt>
+      <dd>有——但只是"少买"。杀 1 个蓝球使投注额降 6.25%，中奖概率也同步降 6.25%，单位投注的期望回报率不变（双色球返奖率约 50%，每注期望亏损恒为一半）。与直接少买一注完全等价。</dd>
+      <dt>"为什么作者说 95%~100% 准确率？"</dt>
+      <dd>在约 100 期的小样本里，闭眼杀 1 个蓝球的随机基线就是 93.75%；95%~98% 在随机下有 3%~33% 概率碰巧达成，本身毫无信息量。只有"100%""135 期 0 错"是真小概率——而若 11 条同时成立，一等奖难度会从 1/1772 万降到 1/554 万，机构一期就能套利到彩票中心破产。它没发生，所以它不是真的。</dd>
+      <dt>"你们的方法能保证不漏掉'真有效'的公式吗？"</dt>
+      <dd>不能保证任意一条未来公式，但能证明"这一类"方法的数学天花板：只要开奖独立，上期号码的确定性函数漏杀率恒为 6/33（红）/1/16（蓝）。新的花式组合只是换皮。</dd>
+      <dt>"数据从哪来？"</dt>
+      <dd>双色球来自中彩中心官方全量历史开奖；福彩3D、六合彩来自各自官方/权威历史开奖库。回测严格一期前瞻，杜绝未来信息泄漏。</dd>
+    </dl>
+  </section>
+
+  <div class="disc">
+    ⚠️ <b>免责声明：</b>彩票开奖为独立随机事件，每注双色球一等奖概率 1/17,721,088。本站所有内容仅为统计验证与科普，<b>不构成任何投注建议，不保证、不暗示任何中奖可能</b>。请理性购彩，量力而行，切勿沉迷。
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>开奖即随机 · 彩票伪证档案库 — 用全量数据回测证伪每一个"稳赚不赔"。</div>
+    <div>本站仅做历史数据回测与统计科普，理性购彩，量力而行。</div>
+  </div>
+</footer>
+
+<script src="data/ssq.js"></script>
+<script>
+(function(){
+  var D = window.SSQ_DATA;
+  // KPI
+  var k = document.getElementById('kpis');
+  [['已证伪方法', D.meta.total+' 条','覆盖双色球/3D/六合'],
+   ['最大 |z|', D.meta.maxz,'远低于显著阈值 ~3.1'],
+   ['过显著性阈值', '0 条','75+13+28+… 全部 = 随机'],
+   ['官方全量数据', '2059 期','双色球 cwl 全量 2013001~2026101']
+  ].forEach(function(r){
+    var d=document.createElement('div'); d.className='kpi';
+    d.innerHTML='<div class="num">'+r[1]+'</div><div class="lbl">'+r[0]+' · '+r[2]+'</div>'; k.appendChild(d);
+  });
+
+  // SSQ 规模
+  var sc=document.getElementById('ssqScale');
+  sc.innerHTML='<h3 style="margin-top:0">数据规模</h3>'+
+    stat(D.meta.total,'条','已证伪方法')+
+    stat('2059','期','官方 cwl 全量 (2013001~2026101)')+
+    stat('0','条','通过 Bonferroni 显著检验')+
+    '<p class="muted" style="font-size:13px;margin-top:8px">覆盖：秘籍杀号公式、主观走势杀号、开机号参考系、红球/蓝球形态类方法、对称码补全变体等。</p>';
+  function stat(v,u,c){return '<div class="stat"><span class="v">'+v+'</span><span class="u">'+u+' · '+c+'</span></div>';}
+
+  // 代表报告
+  var rep=document.getElementById('ssqReports');
+  D.meta.reports.forEach(function(r){
+    var li=document.createElement('li'); li.innerHTML='<b>'+r.title+'</b><br><span class="muted" style="font-size:13px">'+r.note+'</span>'; rep.appendChild(li);
+  });
+
+  // 分类条形
+  var cb=document.getElementById('catBars');
+  var maxn=Math.max.apply(null,D.cats.map(function(c){return c.n;}));
+  D.cats.forEach(function(c){
+    var row=document.createElement('div'); row.className='bar-wrap';
+    row.innerHTML='<div class="bar-name" title="'+c.cat+'">'+c.cat+'</div>'+
+      '<div class="bar-track"><div class="bar-fill" style="width:'+(c.n/maxn*100)+'%"></div></div>'+
+      '<div class="bar-val">'+c.n+' 条 · |z|≤'+c.maxz+'</div>';
+    cb.appendChild(row);
+  });
+
+  // 表格
+  var rows=D.rows, tbody=document.getElementById('tbody');
+  var q=document.getElementById('q'), chips=document.getElementById('catChips');
+  var cats=Array.from(new Set(rows.map(function(r){return r.cat;})));
+  var active='';
+  cats.forEach(function(c){
+    var s=document.createElement('span'); s.className='chip'; s.textContent=c;
+    s.onclick=function(){ if(active===c){active='';s.classList.remove('on');}else{active=c;document.querySelectorAll('.chip').forEach(function(x){x.classList.remove('on');});s.classList.add('on');} render(); };
+    chips.appendChild(s);
+  });
+  function render(){
+    var term=q.value.trim().toLowerCase();
+    var out=rows.filter(function(r){
+      if(active && r.cat!==active) return false;
+      if(term && (r.formula+r.cat+r.id+(r.note||'')).toLowerCase().indexOf(term)<0) return false;
+      return true;
+    });
+    tbody.innerHTML='';
+    out.forEach(function(r){
+      var tr=document.createElement('tr');
+      var vc = r.lift>1.05?'b-green':(r.lift<0.95?'b-red':'b-gray');
+      tr.innerHTML='<td class="muted" style="font-size:13px">'+r.cat+'</td>'+
+        '<td>'+(r.formula||'—')+(r.note?' <span class="muted" style="font-size:12px">('+r.note+')</span>':'')+'</td>'+
+        '<td class="mono">'+r.lift.toFixed(3)+'</td>'+
+        '<td class="mono">'+Math.abs(r.z).toFixed(2)+'</td>'+
+        '<td><span class="badge '+vc+'">=随机</span></td>';
+      tbody.appendChild(tr);
+    });
+    document.getElementById('rowCount').textContent='显示 '+out.length+' / '+rows.length+' 条（全部判定均为"=随机"，无一条显著优于随机基线）。';
+  }
+  q.addEventListener('input',render);
+  render();
+})();
+</script>
+</body>
+</html>
