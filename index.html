@@ -45,6 +45,7 @@
     </div>
     <p class="lead">我们把流传甚广的彩票杀号公式、预测秘籍，用官方全量历史开奖数据逐一做一期前瞻回测。
       结论高度一致：<b>全部等于闭眼随机排除一个号码</b>，没有一条能稳定识别开奖号码。</p>
+    <img class="illus" src="assets/hero.svg" alt="收费秘籍的命中率和闭眼随机一模一样（天平示意）">
     <div class="kpis" id="kpis"></div>
   </div>
 </header>
@@ -74,11 +75,12 @@
       <span class="mono">P(g(X)∈Y)=E[6/33]=6/33</span>，与被杀号码集合大小无关。
       <b>只要摇奖机真的独立，这类杀号公式一条都不可能例外。</b>
     </div>
+    <img class="illus" src="assets/pipeline.svg" alt="证伪回测流水线：官方数据 → 一期前瞻 → 随机基线对照 → Bonferroni 校正">
   </section>
 
   <!-- 双色球 -->
   <section id="ssq">
-    <h2>双色球 SSQ <span class="tag">数据最全 · 已证伪 213 法</span></h2>
+    <h2><img class="sec-icon" src="assets/icon-ssq.svg" alt="">双色球 SSQ <span class="tag">数据最全 · 已证伪 213 法</span></h2>
     <p class="sub">数据源：中国福利彩票官方 cwl 全量 2059 期（2013001~2026101）。累计 213 条杀号/预测方法全量回测，0 条过 Bonferroni 阈值。</p>
     <div class="grid2">
       <div class="card" id="ssqScale"></div>
@@ -176,7 +178,7 @@
 
   <!-- 福彩3D -->
   <section id="d3">
-    <h2>福彩 3D <span class="tag">已证伪 27 法 · 全量 4696 期</span></h2>
+    <h2><img class="sec-icon" src="assets/icon-3d.svg" alt="">福彩 3D <span class="tag">已证伪 27 法 · 全量 4696 期</span></h2>
     <p class="sub">数据源：官方历史开奖库全量 4696 期（2013002~2026201）。27 条杀号 / 取胆 / 选号 / 缩水方法全量或样本外回测，<b>0 条</b>过 Bonferroni 阈值（|z|≥<span id="d3Thresh">3.11</span>）。</p>
 
     <div class="grid2">
@@ -229,7 +231,7 @@
 
   <!-- 六合彩 -->
   <section id="lhc">
-    <h2>六合彩（澳门） <span class="tag">已证伪 686 法 · OOS 212 期</span></h2>
+    <h2><img class="sec-icon" src="assets/icon-lhc.svg" alt="">六合彩（澳门） <span class="tag">已证伪 686 法 · OOS 212 期</span></h2>
     <p class="sub">数据源：璇玑系统 OOS 样本外回测（P30~P241 共 212 期，2026 全量开奖）+《官方数据一致性核查报告》（2026-08-30 修复数据缺陷后重跑）。686 条杀肖公式归档全量证伪，0 条过 Bonferroni 阈值（|z|≥3.11）。</p>
     <div class="grid2">
       <div class="card" id="lhcScale"></div>

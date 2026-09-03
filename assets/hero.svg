@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" role="img" aria-label="秘籍与随机一样准：天平示意">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eaf1ff"/>
+      <stop offset="1" stop-color="#f6f8fb"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="320" rx="20" fill="url(#bg)"/>
+
+  <!-- 散落彩票球 -->
+  <g font-family="Arial, sans-serif" font-weight="700" font-size="16" text-anchor="middle">
+    <circle cx="78" cy="74" r="22" fill="#d83333"/><text x="78" y="80" fill="#fff">07</text>
+    <circle cx="118" cy="214" r="19" fill="#1f6feb"/><text x="118" y="220" fill="#fff">23</text>
+    <circle cx="556" cy="80" r="22" fill="#d83333"/><text x="556" y="86" fill="#fff">31</text>
+    <circle cx="572" cy="206" r="19" fill="#1f6feb"/><text x="572" y="212" fill="#fff">12</text>
+    <circle cx="64" cy="156" r="15" fill="#c8841a"/><text x="64" y="161" fill="#fff" font-size="12">05</text>
+  </g>
+
+  <!-- 天平 -->
+  <g stroke="#1f6feb" stroke-width="6" stroke-linecap="round">
+    <line x1="320" y1="118" x2="210" y2="140"/>
+    <line x1="320" y1="118" x2="430" y2="140"/>
+    <line x1="210" y1="118" x2="430" y2="118"/>
+  </g>
+  <rect x="316" y="118" width="8" height="132" fill="#9fb2cc"/>
+  <polygon points="288,282 352,282 320,250" fill="#9fb2cc"/>
+  <circle cx="320" cy="118" r="8" fill="#1f6feb"/>
+  <!-- 左盘：秘籍 -->
+  <line x1="210" y1="140" x2="210" y2="162" stroke="#9fb2cc" stroke-width="3"/>
+  <ellipse cx="210" cy="168" rx="48" ry="12" fill="#dbe6f5" stroke="#9fb2cc" stroke-width="2"/>
+  <rect x="184" y="138" width="52" height="30" rx="5" fill="#fff" stroke="#1f6feb" stroke-width="2.5"/>
+  <text x="210" y="158" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#1f6feb" text-anchor="middle">秘籍</text>
+  <!-- 右盘：随机 -->
+  <line x1="430" y1="140" x2="430" y2="162" stroke="#9fb2cc" stroke-width="3"/>
+  <ellipse cx="430" cy="168" rx="48" ry="12" fill="#dbe6f5" stroke="#9fb2cc" stroke-width="2"/>
+  <rect x="404" y="138" width="52" height="30" rx="5" fill="#fff" stroke="#1f6feb" stroke-width="2.5"/>
+  <text x="430" y="158" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#1f6feb" text-anchor="middle">随机</text>
+
+  <!-- 结论印章 -->
+  <rect x="372" y="36" width="196" height="46" rx="23" fill="#1a9d5a"/>
+  <text x="470" y="65" font-family="Arial, sans-serif" font-size="19" font-weight="800" fill="#fff" text-anchor="middle">全部 = 随机</text>
+
+  <text x="320" y="308" font-family="Arial, sans-serif" font-size="14" fill="#5b6b7b" text-anchor="middle">收费秘籍的命中率，和闭眼随机一模一样</text>
+</svg>

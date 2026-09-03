@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 180" role="img" aria-label="证伪回测流水线">
+  <defs>
+    <linearGradient id="b" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f3f7ff"/>
+    </linearGradient>
+  </defs>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <g>
+      <rect x="16" y="55" width="170" height="78" rx="12" fill="url(#b)" stroke="#1f6feb" stroke-width="2"/>
+      <circle cx="36" cy="75" r="13" fill="#1f6feb"/><text x="36" y="80" font-size="14" font-weight="800" fill="#fff">1</text>
+      <text x="101" y="92" font-size="15" font-weight="800" fill="#1c2733">官方开奖数据</text>
+      <text x="101" y="114" font-size="12.5" fill="#5b6b7b">双色2059 / 3D 4696 / 全量</text>
+    </g>
+    <g>
+      <rect x="210" y="55" width="170" height="78" rx="12" fill="url(#b)" stroke="#1f6feb" stroke-width="2"/>
+      <circle cx="230" cy="75" r="13" fill="#1f6feb"/><text x="230" y="80" font-size="14" font-weight="800" fill="#fff">2</text>
+      <text x="295" y="92" font-size="15" font-weight="800" fill="#1c2733">一期前瞻回测</text>
+      <text x="295" y="114" font-size="12.5" fill="#5b6b7b">用第 i 期预测 i+1 期</text>
+    </g>
+    <g>
+      <rect x="404" y="55" width="170" height="78" rx="12" fill="url(#b)" stroke="#1f6feb" stroke-width="2"/>
+      <circle cx="424" cy="75" r="13" fill="#1f6feb"/><text x="424" y="80" font-size="14" font-weight="800" fill="#fff">3</text>
+      <text x="489" y="92" font-size="15" font-weight="800" fill="#1c2733">对照随机基线</text>
+      <text x="489" y="114" font-size="12.5" fill="#5b6b7b">杀1红 6/33 · 杀1蓝 1/16</text>
+    </g>
+    <g>
+      <rect x="598" y="55" width="170" height="78" rx="12" fill="#e7f6ee" stroke="#1a9d5a" stroke-width="2"/>
+      <circle cx="618" cy="75" r="13" fill="#1a9d5a"/><text x="618" y="80" font-size="14" font-weight="800" fill="#fff">4</text>
+      <text x="683" y="92" font-size="15" font-weight="800" fill="#0f6b3d">Bonferroni 校正</text>
+      <text x="683" y="114" font-size="12.5" fill="#0f6b3d">结论：全员 = 随机</text>
+    </g>
+    <g fill="#9fb2cc">
+      <polygon points="190,94 204,86 204,102"/>
+      <polygon points="384,94 398,86 398,102"/>
+      <polygon points="578,94 592,86 592,102"/>
+    </g>
+  </g>
+</svg>
