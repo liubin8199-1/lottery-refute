@@ -1,0 +1,14 @@
+# Cloudflare Pages 直接上传时排除的开发产物（不进生产站点）
+build_hero.py
+build_poster.py
+build_social_assets.py
+_build_draws.py
+_build_fc3d.py
+_verify.js
+PROMO.md
+上传CloudflarePages步骤.md
+wrangler.toml
+.cfignore
+.git
+.gitignore
+*.py
