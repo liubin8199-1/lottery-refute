@@ -28,6 +28,7 @@
       <a href="#lhc">六合彩</a>
       <a href="#qa">答疑</a>
       <a href="#msg">留言区</a>
+      <a href="#share">分享</a>
     </nav>
   </div>
   <div class="hero">
@@ -332,6 +333,7 @@
         <li><b>六合彩（澳门）：</b>686 条杀肖公式 OOS 证伪（212 期全量回放，686/686 全死，max|z|=1.06 p=0.291）、平肖 p=0.765、开奖≈iid、生肖盲区、数据缺陷修复后结论稳健——已接数据并渲染详表（规模卡 + 代表报告 + 显著性对比 + 可检索 10 条证伪档案）。</li>
         <li><b>部署：</b>GitHub Pages 公开上线，含 OG 分享元信息与仓库链接；所有数字均来自已核实回测，不编造未校验数据。</li>
         <li><b>留言区：</b>接入纯前端 localStorage 留言板（零配置、无需 GitHub 授权），访客可留名 + 留言 + 删除本人留言；数据仅存本浏览器，属占位框，可后续升级为 giscus 真多人评论区。</li>
+        <li><b>推广：</b>生成站点二维码与 1080×1350 分享海报（213/27/686 三条核心数据 + 扫码入口），并新增"分享给朋友"区块与 OG/Twitter 分享卡片元信息。</li>
       </ul>
     </div>
   </section>
@@ -891,6 +893,33 @@
         '%（= 随机杀 1 个蓝球的基线准确率 15/16）。单人 '+K+' 期全对的理论概率 = <b>'+(Math.pow(p,K)*100).toFixed(3)+
         '%</b>，乘以 '+N+' 人 ≈ 期望 <b>'+theory.toFixed(1)+'</b> 人。</div>';
     };
+  })();
+
+  // ===== 分享区 =====
+  (function initShare(){
+    var copyBtn=document.getElementById('btnCopy'),
+        shareBtn=document.getElementById('btnShare'),
+        hint=document.getElementById('shareHint');
+    if(!copyBtn) return;
+    var url='https://liubin8199-1.github.io/lottery-refute/';
+    copyBtn.onclick=function(){
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(url).then(function(){ hint.textContent='链接已复制到剪贴板'; },function(){ fallback(); });
+      }else{ fallback(); }
+      function fallback(){
+        var ta=document.createElement('textarea'); ta.value=url; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select();
+        try{ document.execCommand('copy'); hint.textContent='链接已复制到剪贴板'; }catch(e){ hint.textContent='复制失败，请手动复制地址栏'; }
+        document.body.removeChild(ta);
+      }
+    };
+    if(navigator.share){
+      shareBtn.style.display='inline-block';
+      shareBtn.onclick=function(){
+        navigator.share({ title:'开奖即随机 · 彩票伪证档案库', text:'用官方全量开奖数据证伪每一个「稳赚不赔」的彩票秘籍。', url:url })
+          .then(function(){ hint.textContent='分享成功'; })
+          .catch(function(e){ if(e.name!=='AbortError') hint.textContent='分享失败：'+e.message; });
+      };
+    }
   })();
 })();
 </script>
