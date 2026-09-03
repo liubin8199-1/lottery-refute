@@ -27,6 +27,7 @@
       <a href="#d3">福彩3D</a>
       <a href="#lhc">六合彩</a>
       <a href="#qa">答疑</a>
+      <a href="#msg">留言区</a>
     </nav>
   </div>
   <div class="hero">
@@ -297,7 +298,38 @@
         <li><b>福彩 3D：</b>27 条杀号/取胆/选号/缩水方法全量或样本外回测，<b>0 条</b>越过 Bonferroni 阈值（max|z| = 2.414 &lt; 3.11）。数据源：官方历史开奖库全量 4696 期。</li>
         <li><b>六合彩（澳门）：</b>已核实结论（686 公式 OOS 证伪 / 平肖 p=0.765 / 开奖≈iid / 生肖盲区）已上卡，逐条详表同步中。</li>
         <li><b>部署：</b>GitHub Pages 公开上线，含 OG 分享元信息与仓库链接；所有数字均来自已核实回测，不编造未校验数据。</li>
+        <li><b>留言区：</b>接入 giscus（GitHub Discussions 托管）评论区，访客可留言 / 提问 / 拍砖；仓库侧开启 Discussions + 安装 giscus App 后生效。</li>
       </ul>
+    </div>
+  </section>
+
+  <!-- 留言区（giscus 驱动，纯静态，评论存于 GitHub Discussions） -->
+  <section id="msg">
+    <h2>留言区 <span class="tag">说说你的看法</span></h2>
+    <p class="sub">欢迎在下方留言、提问或拍砖。评论由 GitHub Discussions 托管，理性交流、拒绝人身攻击与广告。</p>
+    <div class="card" style="padding:16px">
+      <!--
+        ===== giscus 配置说明（需仓库所有者在本机 GitHub 操作）=====
+        1) 打开仓库 liubin8199-1/lottery-refute，开启 Discussions 功能（Settings → General → Features → Discussions）；
+        2) 安装 giscus GitHub App 并授权该仓库：https://giscus.app/zh-CN ；
+        3) 在 giscus 配置页选择分类「留言区」，复制 data-repo-id 与 data-category-id，回填下方两处占位。
+        填好之前留言区不会加载（显示 giscus 错误提示），属正常。
+      -->
+      <script src="https://giscus.app/client.js"
+              data-repo="liubin8199-1/lottery-refute"
+              data-repo-id="GISCUS_REPO_ID"
+              data-category="留言区"
+              data-category-id="GISCUS_CATEGORY_ID"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="bottom"
+              data-theme="light"
+              data-lang="zh-CN"
+              crossorigin="anonymous"
+              async>
+      </script>
     </div>
   </section>
 
