@@ -1,0 +1,7 @@
+# 本地开发/校验脚本：仅用于生成数据与自检，不属于站点文件
+_build_draws.py
+_verify.js
+
+# 临时抓取/校验产物
+live_*.html
+_raw_check.html
