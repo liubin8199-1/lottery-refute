@@ -44,9 +44,12 @@
       <a href="#lab">互动实验室</a>
       <a href="#d3">福彩3D</a>
       <a href="#lhc">六合彩</a>
+      <a href="#daily">每日观测</a>
       <a href="#qa">答疑</a>
+      <a href="#myth">误区</a>
       <a href="#msg">留言区</a>
       <a href="#share">分享</a>
+      <button id="modeToggle" class="nav-toggle" type="button">极简视图</button>
     </nav>
   </div>
   <div class="hero">
@@ -60,10 +63,21 @@
       </div>
       <div class="vd-tagline">最高准确率 <b>≈</b> 随机蒙眼乱杀 —— 一条都没跑赢</div>
       <div class="vd-cmp" id="vdCmp"></div>
-      <div class="vd-foot">数据源：中彩中心官方 cwl 全量 <b>2059</b> 期（2013001~2026101）· 一期前瞻回测 + Bonferroni 多重比较校正</div>
+      <div class="vd-foot">数据源：中彩中心官方 cwl 全量 <b>2059</b> 期（2013001~2026101）· <span class="term" data-tip="用第 i 期数据预测第 i+1 期，预测时看不到未来开奖，杜绝事后找规律。">一期前瞻回测</span> + <span class="term" data-tip="同时检验很多条公式时收紧显著门槛，防止纯运气撞出『显著』。">Bonferroni 多重比较校正</span></div>
     </div>
     <p class="lead">我们把流传甚广的彩票杀号公式、预测秘籍，用官方全量历史开奖数据逐一做一期前瞻回测。
       结论高度一致：<b>全部等于闭眼随机排除一个号码</b>，没有一条能稳定识别开奖号码。</p>
+
+    <div class="plain-summary">
+      <div class="ps-ico">💡</div>
+      <div class="ps-body">
+        <div class="ps-title">大白话结论</div>
+        <p class="ps-text">网上卖的「<b>双色球杀号公式</b>」「<b>3D 独胆秘籍</b>」「<b>六合彩杀肖</b>」……我们把每一条都用<b>官方全量开奖数据</b>，在开奖前就「预测」一遍（不是事后找规律）。</p>
+        <p class="ps-text">结果：<b class="ps-hl">213 + 27 + 686 条秘籍，没有一条比「闭眼随机排除一个号码」更准。</b>省下买秘籍的钱，比信秘籍靠谱。</p>
+        <div class="ps-cta">👇 下面用图表和互动工具，带你一步步看清为什么。</div>
+      </div>
+    </div>
+
     <img class="illus" src="assets/hero.png" alt="收费秘籍的命中率和闭眼随机一模一样（天平示意）">
     <div class="kpis" id="kpis"></div>
   </div>
@@ -78,23 +92,23 @@
     <div class="grid3">
       <div class="card">
         <h3 style="margin-top:0">1 · 全量回测</h3>
-        <p class="muted">用官方完整历史开奖（双色球 2059 期 / 福彩3D 4696 期 / 六合牌型全量），对每条公式做"用第 i 期预测第 i+1 期"的一期前瞻检验，严禁偷看未来。</p>
+        <p class="muted">用官方完整历史开奖（双色球 2059 期 / 福彩3D 4696 期 / 六合牌型全量），对每条公式做"用第 i 期预测第 i+1 期"的<span class="term" data-tip="用第 i 期的数据去预测第 i+1 期，预测时看不到未来开奖。这样能杜绝『事后找规律、怎么都能说对』的作弊。">一期前瞻检验</span>，严禁偷看未来。</p>
       </div>
       <div class="card">
-        <h3 style="margin-top:0">2 · 随机基线</h3>
+        <h3 style="margin-top:0">2 · <span class="term" data-tip="闭眼随机排除一个号码，本应有的命中率。它是衡量『公式有没有用』的照妖镜：任何秘籍的准确率都要先和这个随机基准比。">随机基线</span></h3>
         <p class="muted">杀 1 个红球基线漏杀率 18.18%（6/33）；杀 1 个蓝球 6.25%（1/16）、整期全对 93.75%（15/16）。任何公式的"准确率"都先对标这个照妖镜。</p>
       </div>
       <div class="card">
         <h3 style="margin-top:0">3 · 多重比较校正</h3>
-        <p class="muted">同时检验 N 条公式时，用 Bonferroni 校正（α=0.05/N），杜绝"75 条里总有一条碰巧显著"的幸存者偏差。</p>
+        <p class="muted">同时检验 N 条公式时，用<span class="term" data-tip="同时检验很多条公式时，要把『显著』的门槛收紧（α 除以公式条数）。否则 75 条里总会有几条纯靠运气『碰巧显著』。">Bonferroni 校正</span>（α=0.05/N），杜绝"75 条里总有一条碰巧显著"的幸存者偏差。</p>
       </div>
     </div>
-    <div class="callout">
-      <b>数学必然性：</b>若开奖是独立同分布（iid），则对任意"上期号码的确定性函数" g，漏杀率恒为
+    <div class="callout tech">
+      <b>数学必然性：</b>若开奖是<span class="term" data-tip="每期开奖互不影响、每个号码概率相同。这是彩票能用数学证伪的根源：只要满足这条，任何『看历史猜下一期』的公式命中率都等于随机。">独立同分布（iid）</span>，则对任意"上期号码的确定性函数" g，漏杀率恒为
       <span class="mono">P(g(X)∈Y)=E[6/33]=6/33</span>，与被杀号码集合大小无关。
       <b>只要摇奖机真的独立，这类杀号公式一条都不可能例外。</b>
     </div>
-    <img class="illus" src="assets/pipeline.svg" alt="证伪回测流水线：官方数据 → 一期前瞻 → 随机基线对照 → Bonferroni 校正">
+    <img class="illus tech" src="assets/pipeline.svg" alt="证伪回测流水线：官方数据 → 一期前瞻 → 随机基线对照 → Bonferroni 校正">
   </section>
 
   <!-- 双色球 -->
@@ -110,12 +124,12 @@
       </div>
     </div>
 
-    <div class="card" style="margin-top:18px">
+    <div class="card tech" style="margin-top:18px">
       <h3 style="margin-top:0">证伪方法分类分布（按条数，每条都 ≤ 随机）</h3>
       <div id="catBars"></div>
     </div>
 
-    <div class="card" style="margin-top:18px">
+    <div class="card tech" style="margin-top:18px">
       <h3 style="margin-top:0">显著性检验全景：213 条方法的 |z| 落点</h3>
       <p class="muted" style="font-size:13px">横轴是按 |z| 分桶的方法条数，竖虚线是 Bonferroni 显著性阈值 <b>|z|≈3.1</b>。只要开奖独立，确定性杀号法的 |z| 应呈以 0 为中心的正态；<b>全部 213 条都落在阈值左侧</b>，无一越线。</p>
       <div id="zChart" class="zchart"></div>
@@ -125,7 +139,7 @@
       </div>
     </div>
 
-    <div class="card" style="margin-top:18px">
+    <div class="card tech" style="margin-top:18px">
       <h3 style="margin-top:0">随机基线对照：每条秘籍 vs 蒙眼乱杀</h3>
       <p class="muted" style="font-size:13px">横轴是 <b>lift</b>（实测漏杀率相对随机基线的倍数）：<b>lift = 1.000 就是"和蒙眼乱杀一模一样"</b>，只有明显 &gt;1 才算优于随机。
         每行的浅蓝色横条 = 该类别所有方法的波动范围，深蓝色竖线 = 该类别平均值，红色虚线 = 随机基线。
@@ -145,7 +159,9 @@
       <p class="muted" style="font-size:13px">lift = 基线 / 实测漏杀率，&gt;1 才优于随机；z 为负数代表"看起来优于随机"但均未过显著性阈值。全部 = 随机。</p>
       <input class="search" id="q" placeholder="搜索公式 / 类别，如：绝杀、对称码、v12、主观 …">
       <div class="chips" id="catChips"></div>
-      <div style="max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:12px">
+      <details class="table-fold tech" id="fold-ssq">
+        <summary class="table-fold-sum">📊 展开「可检索证伪档案」全 213 条数据表 <span class="chev">▸</span></summary>
+        <div style="max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:12px;margin-top:12px">
         <table id="tbl">
           <thead><tr>
             <th class="th-sort" data-sort="cat" style="width:170px">类别 <span class="arr"></span></th>
@@ -156,7 +172,8 @@
           </tr></thead>
           <tbody id="tbody"></tbody>
         </table>
-      </div>
+        </div>
+      </details>
       <div class="disc" id="rowCount"></div>
     </div>
   </section>
@@ -168,8 +185,8 @@
 
     <div class="card">
       <h3 style="margin-top:0">① 秘籍粉碎机：选一条"秘籍"，当场用 2059 期真实数据回测</h3>
-      <p class="muted" style="font-size:13px">统一口径：<b>用第 i 期开奖号码算出"下一期要杀掉的号码"，再看第 i+1 期有没有真的避开</b> —— 严格一期前瞻，绝不偷看未来。
-        随机基线：杀 1 个红球漏杀率 <b>18.18%</b>（6/33），杀 1 个蓝球 <b>6.25%</b>（1/16）。</p>
+      <p class="muted" style="font-size:13px">统一口径：<b>用第 i 期开奖号码算出"下一期要杀掉的号码"，再看第 i+1 期有没有真的避开</b> —— 严格<span class="term" data-tip="用第 i 期数据预测第 i+1 期，预测时看不到未来开奖。杜绝事后找规律。">一期前瞻</span>，绝不偷看未来。
+        <span class="term" data-tip="闭眼随机排除一个号码本应有的命中率，是公式有没有用的参照基准。">随机基线</span>：杀 1 个红球漏杀率 <b>18.18%</b>（6/33），杀 1 个蓝球 <b>6.25%</b>（1/16）。</p>
       <div class="lab-ctrl">
         <label for="labRule">选一条"秘籍"：</label>
         <select id="labRule" style="min-width:300px"></select>
@@ -177,7 +194,7 @@
       </div>
       <div class="lab-result" id="labResult"><div class="lab-note">点击「开始回测」，用 2059 期真实开奖数据检验这条规则。</div></div>
       <div class="lab-note"><b>怎么读结果：</b>「漏杀率」越低代表"杀得越准"。只有当它明显低于随机基线、且 <b>|z| ≥ 1.96</b> 时，才算"看起来有效"；
-        但本站同时检验了 213 条方法，真正的门槛要用 Bonferroni 校正到 <b>|z| ≈ 3.1</b>。你可以逐条点过去，看看到底有几条能越线。</div>
+        但本站同时检验了 213 条方法，真正的门槛要用<span class="term" data-tip="同时检验 213 条公式，要把显著门槛收紧到 |z|≈3.1，否则纯运气也会撞出约 10 条看起来『显著』的。">Bonferroni 校正</span>到 <b>|z| ≈ 3.1</b>。你可以逐条点过去，看看到底有几条能越线。</div>
     </div>
 
     <div class="card" style="margin-top:18px">
@@ -191,7 +208,7 @@
       </div>
       <div class="sim-out" id="simOut"><div class="lab-note">点击「开始模拟」，看看纯运气能造出多少个"大师"。</div></div>
       <div class="lab-note"><b>为什么这很重要：</b>你看到的"某某大师连续 N 期全对"，在足够大的基数下是<b>统计上必然会出现</b>的，与他有没有"内部公式"无关。
-        失败者不会开直播，只有赢家会被你看到 —— 这就是幸存者偏差。</div>
+        失败者不会开直播，只有赢家会被你看到 —— 这就是<span class="term" data-tip="你只看到『连中 N 期』的赢家，看不到同样用这方法却输掉的大批人。于是误以为成功有规律，其实只是大基数下的必然。">幸存者偏差</span>。</div>
     </div>
   </section>
 
@@ -208,7 +225,7 @@
       </div>
     </div>
 
-    <div class="card" style="margin-top:18px">
+    <div class="card tech" style="margin-top:18px">
       <h3 style="margin-top:0">显著性检验全景：27 条方法的 |z| 落点</h3>
       <p class="muted" style="font-size:13px">横轴是按 |z| 分桶的方法条数，竖虚线是 Bonferroni 显著性阈值。3D 的"杀 1 个数字"基线是 90%（单位置）/ 72.9%（三位数），取胆 3 码 65.7%、1D 单胆 27.1%；<b>全部 27 条都落在阈值左侧</b>。</p>
       <div id="d3zChart" class="zchart"></div>
@@ -223,7 +240,9 @@
       <p class="muted" style="font-size:13px">"实测 / 基线"为该方法的正确率（杀号=杀对率，取胆选号=命中率）；lift &gt; 1 才优于随机；|z| 为对随机基线的标准化偏离。<b>全部 = 随机。</b></p>
       <input class="search" id="q3" placeholder="搜索公式 / 类别，如：合值、冷号、追冷、共振 …">
       <div class="chips" id="catChips3"></div>
-      <div style="max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:12px">
+      <details class="table-fold tech" id="fold-d3">
+        <summary class="table-fold-sum">📊 展开「可检索证伪档案」全 27 条数据表 <span class="chev">▸</span></summary>
+        <div style="max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:12px;margin-top:12px">
         <table id="tbl3">
           <thead><tr>
             <th class="th-sort" data-sort="cat" style="width:150px">类别 <span class="arr"></span></th>
@@ -236,7 +255,8 @@
           </tr></thead>
           <tbody id="tbody3"></tbody>
         </table>
-      </div>
+        </div>
+      </details>
       <div class="disc" id="rowCount3"></div>
     </div>
 
@@ -261,7 +281,7 @@
       </div>
     </div>
 
-    <div class="card" style="margin-top:18px">
+    <div class="card tech" style="margin-top:18px">
       <h3 style="margin-top:0">显著性检验结论：686 公式的 |z| 落点</h3>
       <p class="muted" style="font-size:13px">横轴是 686 条杀肖公式在 OOS 212 期回放中观测到的漏杀率偏离随机基线的标准化幅度（|z|）。红色虚线为 Bonferroni 显著性阈值 <b>|z|≈3.1</b>。686 条公式的<b>最大 |z| 仅 1.06</b>（观测漏杀率 92.3% vs 基线 91.6%，p=0.291，不显著），<b>全部远低于阈值</b>。</p>
       <div id="lhcZ" class="zchart"></div>
@@ -276,7 +296,9 @@
       <p class="muted" style="font-size:13px">数字均来自璇玑系统已核实 OOS 回测与《官方数据一致性核查报告》。字段为"—"表示该方法的回测设计本身不产出对应数值（如命中率/OR，依方法而定）。</p>
       <input class="search" id="qL" placeholder="搜索公式 / 类别，如：杀肖、平肖、生肖盲区、Logistic …">
       <div class="chips" id="catChipsL"></div>
-      <div style="max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:12px">
+      <details class="table-fold tech" id="fold-lhc">
+        <summary class="table-fold-sum">📊 展开「可检索证伪档案」10 条代表数据表 <span class="chev">▸</span></summary>
+        <div style="max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:12px;margin-top:12px">
         <table id="tblL">
           <thead><tr>
             <th class="th-sort" data-sort="cat" style="width:160px">类别 <span class="arr"></span></th>
@@ -289,7 +311,8 @@
           </tr></thead>
           <tbody id="tbodyL"></tbody>
         </table>
-      </div>
+        </div>
+      </details>
       <div class="disc" id="rowCountL"></div>
     </div>
 
@@ -302,12 +325,60 @@
     </div>
   </section>
 
+  <!-- 每日观测：系统当天输出 · 纯观测/科普 -->
+  <section id="daily">
+    <h2>每日观测 <span class="tag">系统当天输出 · 纯观测</span></h2>
+    <p class="sub">下面展示某自动化预测系统每天生成的「金胆 / 三胆 / 杀号 / 复式」与福彩 3D 观测。它们是系统的<b>观测输出</b>，不是荐号——下方「命中率对照」会当场证明：这类输出的命中率与蒙眼随机无差异。</p>
+
+    <div class="compliance-banner">
+      ⚠️ <b>合规声明：</b>本板块为<b>纯观测 / 科普</b>。号码在开奖前由系统自动生成、开奖后回填核对；所有玩法真实 EV ≤ 0（iid 随机 + 庄家抽水），<b>不构成任何投注建议，不保证、不暗示任何中奖可能</b>。请勿据此下注。
+    </div>
+
+    <div class="obs-grid">
+      <!-- 双色球 SSQ -->
+      <div class="obs-card">
+        <h3 style="margin-top:0">双色球 SSQ · 第 <span id="ssqNextQh">—</span> 期 <span class="obs-flag">预测</span></h3>
+        <p class="obs-meta">数据源：官方历史全量 <span id="ssqN">—</span> 期（截至第 <span id="ssqSrcQh">—</span> 期）· 生成于开奖前</p>
+        <div class="obs-rows">
+          <div class="obs-row"><span class="obs-k">金胆</span><span class="obs-v gold" id="ssqGold">—</span><span class="obs-x">系统认为最可能出现的 1 个红球</span></div>
+          <div class="obs-row"><span class="obs-k">三胆</span><span class="obs-v" id="ssqThree">—</span><span class="obs-x">系统认为最可能出现的前 3 个红球</span></div>
+          <div class="obs-row"><span class="obs-k">杀号</span><span class="obs-v kill" id="ssqKill">—</span><span class="obs-x">综合分最低 6 红（系统认为最不可能出现）</span></div>
+          <div class="obs-row"><span class="obs-k">复式</span><span class="obs-v" id="ssqCombo">—</span><span class="obs-x">前 15 红（参考口径，中即中）</span></div>
+          <div class="obs-row"><span class="obs-k">蓝球 Top5</span><span class="obs-v blue" id="ssqBlue">—</span><span class="obs-x">蓝球综合分前 5</span></div>
+        </div>
+        <div class="hit-oneline" id="ssqHitOne">—</div>
+        <div class="hit-cmp tech">
+          <div class="hit-title">📐 诚实对照：这套「金胆 / 三胆」到底灵不灵？</div>
+          <div id="ssqHitBars"></div>
+          <div class="hit-note" id="ssqHitNote"></div>
+        </div>
+      </div>
+
+      <!-- 福彩3D -->
+      <div class="obs-card">
+        <h3 style="margin-top:0">福彩 3D · 第 <span id="fc3dNextQh">—</span> 期 <span class="obs-flag">预测</span></h3>
+        <p class="obs-meta">上期开奖 <b id="fc3dPrev">—</b> · 数据源 <span id="fc3dFile">—</span> · 生成 <span id="fc3dGen">—</span></p>
+        <div class="obs-rows">
+          <div class="obs-row"><span class="obs-k">单选 Top10</span><span class="obs-v mono" id="fc3dSingle">—</span></div>
+          <div class="obs-row"><span class="obs-k">组三 Top10</span><span class="obs-v mono" id="fc3dZ3">—</span></div>
+          <div class="obs-row"><span class="obs-k">组六 Top10</span><span class="obs-v mono" id="fc3dZ6">—</span></div>
+        </div>
+        <div class="obs-tables tech">
+          <div class="obs-tbl-block"><div class="obs-tbl-h">断组校验（占组数 · observation-only）</div><div id="fc3dDuan"></div></div>
+          <div class="obs-tbl-block"><div class="obs-tbl-h">冷热号（w10 / w30 / w50）</div><div id="fc3dHot"></div></div>
+          <div class="obs-tbl-block"><div class="obs-tbl-h">运算盲区回补</div><div id="fc3dBlind"></div></div>
+        </div>
+        <div class="lab-note" id="fc3dNote"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- 答疑 -->
   <section id="qa">
     <h2>常见疑问</h2>
     <dl class="faq">
       <dt>"那杀号到底有没有用？"</dt>
-      <dd>有——但只是"少买"。杀 1 个蓝球使投注额降 6.25%，中奖概率也同步降 6.25%，单位投注的期望回报率不变（双色球返奖率约 50%，每注期望亏损恒为一半）。与直接少买一注完全等价。</dd>
+      <dd>有——但只是"少买"。<span class="term" data-tip="『杀号』= 预测某个号码这期『不会开』，用来缩小投注范围。杀对能少买，但中奖概率也同步降低，单位投注的期望回报不变。">杀 1 个蓝球</span>使投注额降 6.25%，中奖概率也同步降 6.25%，单位投注的期望回报率不变（双色球返奖率约 50%，每注期望亏损恒为一半）。与直接少买一注完全等价。</dd>
       <dt>"为什么作者说 95%~100% 准确率？"</dt>
       <dd>在约 100 期的小样本里，闭眼杀 1 个蓝球的随机基线就是 93.75%；95%~98% 在随机下有 3%~33% 概率碰巧达成，本身毫无信息量。只有"100%""135 期 0 错"是真小概率——而若 11 条同时成立，一等奖难度会从 1/1772 万降到 1/554 万，机构一期就能套利到彩票中心破产。它没发生，所以它不是真的。</dd>
       <dt>"你们的方法能保证不漏掉'真有效'的公式吗？"</dt>
@@ -315,16 +386,16 @@
       <dt>"数据从哪来？"</dt>
       <dd>双色球来自中彩中心官方全量历史开奖；福彩3D、六合彩来自各自官方/权威历史开奖库。回测严格一期前瞻，杜绝未来信息泄漏。</dd>
       <dt>"可我朋友上次就是用这个公式中的！"</dt>
-      <dd>这是<b>小样本错觉</b>叠加<b>幸存者偏差</b>。<br>
+      <dd>这是<b><span class="term" data-tip="样本太小，随机波动就能制造『连中好几次』的假象。约 100 期里闭眼杀蓝球就有 93.75% 准确率，根本不需要公式。">小样本错觉</span></b>叠加<b><span class="term" data-tip="只看到成功的赢家，看不到同样方法却失败的多数人，于是误以为成功有规律。">幸存者偏差</span></b>。<br>
         ① <b>小样本</b>：在约 100 期里，闭眼杀 1 个蓝球的随机基线准确率就有 93.75%，"连中好几次"在纯随机下极其常见，根本不需要公式。<br>
         ② <b>幸存者偏差</b>：用同一条公式却失败的人不会发帖、不会上电视，你看到的只是赢的那一个。<br>
         ③ <b>正确的问法</b>不是"他有没有中过"，而是"这条公式在 2000+ 期上的长期漏杀率，是否<b>显著低于</b>随机基线"。本站 213 条的答案是：一条都没有。<br>
         你可以到上面的「幸存者偏差模拟器」亲手验证：让 1000 个人纯瞎蒙，照样会冒出一批"大师"。</dd>
       <dt>"我的公式很复杂，不是只看上一期。"</dt>
       <dd>复杂度救不了它 —— 数学上恰恰相反。<br>
-        <b>只要开奖是独立同分布（iid）</b>，那么对任意"历史数据的函数" g，不管它有多复杂、参考了多少期、加了多少层条件，它对下一期的漏杀率恒等于随机基线：<br>
+        <b>只要开奖是<span class="term" data-tip="每期开奖互不影响、号码概率相同。只要满足这条，任何『看历史猜下期』的公式命中率都等于随机，复杂度救不了它。">独立同分布（iid）</span></b>，那么对任意"历史数据的函数" g，不管它有多复杂、参考了多少期、加了多少层条件，它对下一期的漏杀率恒等于随机基线：<br>
         <span class="mono">P( g(历史) ∈ 下期号码 ) = 6/33（红球） 或 1/16（蓝球）</span><br>
-        复杂度带来的只有两件事：<b>叙事上的说服力</b>（看起来"很有道理"），以及<b>回测时更容易过拟合到历史噪声</b>；一旦进入没见过的新数据，立刻打回原形。<br>
+        复杂度带来的只有两件事：<b>叙事上的说服力</b>（看起来"很有道理"），以及<b>回测时更容易<span class="term" data-tip="在历史数据上『拟合』得极好，但换一批没见过的新数据立刻失灵。公式越复杂越容易掉进这个坑。">过拟合到历史噪声</span></b>；一旦进入没见过的新数据，立刻打回原形。<br>
         本站 213 条里既有"看上期一个数"的简单公式，也有多期加权、形态识别、条件概率转移的复杂公式 —— <b>全部</b>没有跑赢随机。</dd>
       <dt>"既然都不灵，为什么还有人卖秘籍？"</dt>
       <dd>因为卖秘籍本身就是一门生意，它的盈利模式和"公式灵不灵"<b>完全无关</b>。<br>
@@ -336,15 +407,55 @@
     </dl>
   </section>
 
+  <!-- 赌徒谬误科普模块 -->
+  <section id="myth">
+    <h2>一个经典误区：赌徒谬误 <span class="tag">为什么你会觉得"该出了"</span></h2>
+    <p class="sub">这是大多数人相信"秘籍"的底层心理。看懂它，你就看懂了为什么所有"预测"都是幻觉。</p>
+
+    <div class="grid2">
+      <div class="card">
+        <h3 style="margin-top:0">① 它长什么样？</h3>
+        <p class="muted">双色球连续 3 期都开出了号码「12」，于是你觉得：<b>"12 已经热了，下期该回避"</b>，或者 <b>"12 憋太久了，下期该出了"</b>。</p>
+        <p class="muted">这两种直觉都错。开奖是<span class="term" data-tip="每期开奖互不影响、每个号码概率相同。上一期开出什么，对下一期毫无影响。">独立事件</span>——下一期「12」出现的概率，永远等于它本来的概率（红球 1/33，蓝球 1/16），<b>跟它之前出没出过、连出几次，一毛钱关系都没有</b>。</p>
+        <div class="callout" style="margin-top:8px">记住一句话：<b>过去已经发生的事，改变不了未来独立事件的概率。</b></div>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">② 亲手试：抛硬币实验</h3>
+        <p class="muted" style="font-size:13px">连续抛出正面后，下一次正面的概率还是 50% 吗？自己抛几下就明白了。</p>
+        <div class="myth-sim" id="coinSim">
+          <div class="myth-stats">
+            <div class="myth-stat"><div class="mv" id="coinTotal">0</div><div class="ml">总次数</div></div>
+            <div class="myth-stat"><div class="mv" id="coinHeads">0</div><div class="ml">正面次数</div></div>
+            <div class="myth-stat"><div class="mv" id="coinStreak">0</div><div class="ml">当前连击（正）</div></div>
+          </div>
+          <div class="myth-flip" id="coinFace">—</div>
+          <div class="lab-ctrl">
+            <button class="lab-btn" id="coinFlip">抛一次</button>
+            <button class="lab-btn" id="coinRun" style="background:var(--chip);color:var(--ink)">连抛 20 次</button>
+            <button class="lab-btn" id="coinReset" style="background:#fff;color:var(--sub);border:1px solid var(--line)">重置</button>
+          </div>
+          <div class="lab-note">无论「当前连击」是多少，下一次正面的概率永远是 <b>50%</b>。连出 10 个正面后，第 11 个正面的概率仍然是 50%——不更低，也不更高。这正是赌徒谬误的反面真相。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h3 style="margin-top:0">③ 它和"秘籍"有什么关系？</h3>
+      <p class="muted">所有"追热号""杀冷号""对称码""遗漏值"类秘籍，本质都是在赌徒谬误上做文章：<b>误以为过去的开奖能"预示"未来</b>。但开奖是独立事件，过去无法预示未来，于是这些秘籍的命中率，最终都回归到"闭眼随机"。这也正是本站 213+27+686 条回测全死的数学根源。</p>
+      <div class="lab-note">想亲手验证？回到上方「<a href="#lab">秘籍粉碎机</a>」，随便选一条规则跑 2059 期——它的漏杀率和随机基线一模一样。</div>
+    </div>
+  </section>
+
   <div class="disc">
     ⚠️ <b>免责声明：</b>彩票开奖为独立随机事件，每注双色球一等奖概率 1/17,721,088。本站所有内容仅为统计验证与科普，<b>不构成任何投注建议，不保证、不暗示任何中奖可能</b>。请理性购彩，量力而行，切勿沉迷。
   </div>
 
   <!-- 更新记录 -->
-  <section id="log">
+  <section id="log" class="tech">
     <h2>更新记录 <span class="tag">本站维护轨迹</span></h2>
     <div class="card">
       <ul style="margin:0;padding-left:20px;line-height:2">
+        <li><b>每日观测（#daily）：</b>新增板块，展示双色球 SSQ「金胆/三胆/杀号/复式」（综合分=0.4×频率+0.6×遗漏，与 #ssq 证伪方法论一致）+ 福彩3D 每日观测（v42 预测候选 Top10 + observation-only 观测层画像）。附全量一期前瞻命中率对照：金胆 19.85% ≈ 随机基线 18.18%、三胆 47.82% ≈ 46.39%——当场证明系统输出≈蒙眼随机。合规声明：纯观测/非荐号/开奖前生成开奖后回填/EV≤0。数据由 gen_daily.py 生成 data/daily.js，每次开奖后可重跑刷新。</li>
         <li><b>双色球：</b>213 条杀号/预测方法全量一期前瞻回测，<b>0 条</b>越过 Bonferroni 阈值（max|z| = 2.504 &lt; ≈3.1）。数据源：官方 cwl 全量 2059 期。</li>
         <li><b>可视化：</b>|z| 显著性直方图、方法分类分布条、可检索 213 条证伪档案表（支持关键词搜索 + 表头排序）。</li>
         <li><b>福彩 3D：</b>27 条杀号/取胆/选号/缩水方法全量或样本外回测，<b>0 条</b>越过 Bonferroni 阈值（max|z| = 2.414 &lt; 3.11）。数据源：官方历史开奖库全量 4696 期。</li>
@@ -447,6 +558,64 @@
 <script src="data/ssq.js"></script>
 <script src="data/fc3d.js"></script>
 <script src="data/lhc.js"></script>
+<script src="data/daily.js"></script>
+<script>
+(function renderDaily(){
+  function set(id,v){ var el=document.getElementById(id); if(el) el.textContent=v; }
+  function nums(a){ return (a||[]).map(function(x){return (x<10?'0'+x:x);}).join(' '); }
+  function monoNums(a){ return (a||[]).join(' '); }
+
+  var S=window.SSQ_DAILY;
+  if(S){
+    set('ssqNextQh', S.next_qh); set('ssqSrcQh', S.source_qh); set('ssqN', S.n_periods);
+    var g=document.getElementById('ssqGold'); if(g) g.textContent=(S.gold<10?'0'+S.gold:S.gold);
+    set('ssqThree', nums(S.three));
+    set('ssqKill', nums(S.kill));
+    set('ssqCombo', nums(S.combo_reds));
+    set('ssqBlue', nums(S.blue_top5));
+    var h=S.honest;
+    var one=document.getElementById('ssqHitOne');
+    if(one) one.innerHTML='经全量一期前瞻回测（'+h.n_oos+' 期）：金胆命中率 <b>'+(h.gold_rate*100).toFixed(1)+'%</b> ≈ 随机基线 '+(h.gold_base*100).toFixed(1)+'%；三胆命中率 <b>'+(h.three_rate*100).toFixed(1)+'%</b> ≈ 随机基线 '+(h.three_base*100).toFixed(1)+'%。<b>与蒙眼随机无差异。</b>';
+    (function(){
+      var el=document.getElementById('ssqHitBars'); if(!el) return;
+      function bar(name,real,base,realTxt){
+        var AX=Math.max(real,base)*1.8;
+        function row(nm,v,cls,txt){
+          return '<div class="hit-row"><div class="hit-name">'+nm+'</div><div class="hit-track"><div class="hit-fill '+cls+'" style="width:'+Math.max(2,v/AX*100).toFixed(1)+'%"></div></div><div class="hit-val">'+txt+'</div></div>';
+        }
+        return row(name+'（实测）',real,'hit-real',realTxt)+row(name+'（随机基线）',base,'hit-base',(base*100).toFixed(1)+'%');
+      }
+      el.innerHTML =
+        bar('金胆命中率', h.gold_rate, h.gold_base, (h.gold_rate*100).toFixed(1)+'%')+
+        bar('三胆命中率', h.three_rate, h.three_base, (h.three_rate*100).toFixed(1)+'%');
+      var n=document.getElementById('ssqHitNote');
+      if(n) n.textContent=h.note;
+    })();
+  }
+
+  var F=window.FC3D_DAILY;
+  if(F){
+    set('fc3dNextQh', F.next_qh); set('fc3dPrev', F.prev_draw);
+    set('fc3dFile', F.file); set('fc3dGen', F.generated);
+    set('fc3dSingle', monoNums(F.single_top10));
+    set('fc3dZ3', monoNums(F.z3_top10));
+    set('fc3dZ6', monoNums(F.z6_top10));
+    function tbl(id, t){
+      var el=document.getElementById(id); if(!el||!t) return;
+      var html='<table class="obs-table"><thead><tr>';
+      t.hdr.forEach(function(c){ html+='<th>'+c+'</th>'; });
+      html+='</tr></thead><tbody>';
+      t.rows.forEach(function(r){ html+='<tr>'+r.map(function(c){return '<td>'+c+'</td>';}).join('')+'</tr>'; });
+      html+='</tbody></table>';
+      el.innerHTML=html;
+    }
+    tbl('fc3dDuan', F.tables&&F.tables.duan);
+    tbl('fc3dHot', F.tables&&F.tables.hot);
+    tbl('fc3dBlind', F.tables&&F.tables.blind);
+    var note=document.getElementById('fc3dNote'); if(note) note.textContent=F.note;
+  }
+})();
+</script>
 <script>
 (function(){
   var D = window.SSQ_DATA;
@@ -942,6 +1111,89 @@
       };
     }
   })();
+})();
+</script>
+
+<script>
+(function(){
+  // 名词悬浮解释：气泡定位（悬停 / 聚焦 / 移动端点击）
+  var tip=document.createElement('div'); tip.id='tip'; tip.setAttribute('role','tooltip'); document.body.appendChild(tip);
+  var cur=null;
+  function show(el){
+    var t=el.getAttribute('data-tip'); if(!t) return;
+    tip.textContent=t; tip.classList.add('show');
+    var r=el.getBoundingClientRect();
+    var tw=tip.offsetWidth, th=tip.offsetHeight;
+    var top=r.top-th-10;
+    if(top<8) top=r.bottom+10;
+    var left=r.left+(r.width-tw)/2;
+    if(left<8) left=8;
+    if(left+tw>window.innerWidth-8) left=window.innerWidth-tw-8;
+    tip.style.top=top+'px'; tip.style.left=left+'px';
+  }
+  function hide(){ tip.classList.remove('show'); cur=null; }
+  function bind(el){
+    el.addEventListener('mouseenter',function(){ cur=el; show(el); });
+    el.addEventListener('mouseleave',function(){ hide(); });
+    el.addEventListener('focus',function(){ cur=el; show(el); });
+    el.addEventListener('blur',function(){ hide(); });
+    el.addEventListener('click',function(e){ e.stopPropagation(); if(cur===el){ hide(); } else { cur=el; show(el); } });
+  }
+  document.querySelectorAll('.term').forEach(bind);
+  document.addEventListener('click',function(e){ if(!e.target.closest('.term')) hide(); });
+  window.addEventListener('scroll',hide,true);
+
+  // 大表格默认折叠：用户一旦搜索 / 点分类，自动展开对应表格
+  document.querySelectorAll('input.search').forEach(function(inp){
+    inp.addEventListener('input',function(){
+      var sec=inp.closest('section'); var fd=sec&&sec.querySelector('.table-fold'); if(fd) fd.open=true;
+    });
+  });
+  document.addEventListener('click',function(e){
+    var chip=e.target.closest && e.target.closest('.chip');
+    if(chip){ var sec=chip.closest('section'); var fd=sec&&sec.querySelector('.table-fold'); if(fd) fd.open=true; }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  // 赌徒谬误：抛硬币实验
+  var ct=document.getElementById('coinTotal'),ch=document.getElementById('coinHeads'),
+      cs=document.getElementById('coinStreak'),cf=document.getElementById('coinFace');
+  if(ct){
+    var t=0,h=0,s=0;
+    function flip(){
+      var isH=Math.random()<0.5; t++;
+      if(isH){h++;s++;}else{s=0;}
+      ct.textContent=t; ch.textContent=h; cs.textContent=s;
+      cf.textContent=isH?'正':'反';
+      cf.style.background=isH?'#e7f6ee':'#fdeaea';
+      cf.style.color=isH?'#1a9d5a':'#d83333';
+    }
+    document.getElementById('coinFlip').onclick=flip;
+    document.getElementById('coinRun').onclick=function(){for(var i=0;i<20;i++)flip();};
+    document.getElementById('coinReset').onclick=function(){t=0;h=0;s=0;ct.textContent='0';ch.textContent='0';cs.textContent='0';cf.textContent='—';cf.style.background='#f1f5fa';cf.style.color='var(--ink)';};
+  }
+
+  // 极简/大众视图切换（localStorage 记忆）
+  var KEY='lottery_refute_mode', btn=document.getElementById('modeToggle');
+  function applyMode(simple){
+    document.body.classList.toggle('simple', simple);
+    if(btn) btn.textContent= simple ? '完整视图' : '极简视图';
+    var main=document.querySelector('main.wrap'), b=document.getElementById('simpleBanner');
+    if(simple){
+      if(!b){ b=document.createElement('div'); b.id='simpleBanner'; b.className='simple-banner'; b.textContent='🌿 极简模式：已隐藏统计图表与技术细节，只保留核心结论与互动实验。'; if(main) main.insertBefore(b, main.firstChild); }
+    } else if(b){ b.remove(); }
+  }
+  var saved=(function(){try{return localStorage.getItem(KEY);}catch(e){return null;}})()==='simple';
+  applyMode(saved);
+  if(btn) btn.onclick=function(){
+    var next=!document.body.classList.contains('simple');
+    applyMode(next);
+    try{ localStorage.setItem(KEY, next?'simple':'full'); }catch(e){}
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
 })();
 </script>
 </body>
