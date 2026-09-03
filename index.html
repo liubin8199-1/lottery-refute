@@ -298,40 +298,78 @@
         <li><b>福彩 3D：</b>27 条杀号/取胆/选号/缩水方法全量或样本外回测，<b>0 条</b>越过 Bonferroni 阈值（max|z| = 2.414 &lt; 3.11）。数据源：官方历史开奖库全量 4696 期。</li>
         <li><b>六合彩（澳门）：</b>已核实结论（686 公式 OOS 证伪 / 平肖 p=0.765 / 开奖≈iid / 生肖盲区）已上卡，逐条详表同步中。</li>
         <li><b>部署：</b>GitHub Pages 公开上线，含 OG 分享元信息与仓库链接；所有数字均来自已核实回测，不编造未校验数据。</li>
-        <li><b>留言区：</b>接入 giscus（GitHub Discussions 托管）评论区，访客可留言 / 提问 / 拍砖；仓库侧开启 Discussions + 安装 giscus App 后生效。</li>
+        <li><b>留言区：</b>接入纯前端 localStorage 留言板（零配置、无需 GitHub 授权），访客可留名 + 留言 + 删除本人留言；数据仅存本浏览器，属占位框，可后续升级为 giscus 真多人评论区。</li>
       </ul>
     </div>
   </section>
 
-  <!-- 留言区（giscus 驱动，纯静态，评论存于 GitHub Discussions） -->
+  <!-- 留言区（纯前端 localStorage 实现，零配置、无需 GitHub 授权） -->
   <section id="msg">
     <h2>留言区 <span class="tag">说说你的看法</span></h2>
-    <p class="sub">欢迎在下方留言、提问或拍砖。评论由 GitHub Discussions 托管，理性交流、拒绝人身攻击与广告。</p>
+    <p class="sub">欢迎在下方留言、提问或拍砖。本留言板为纯前端实现，无需任何后台。</p>
     <div class="card" style="padding:16px">
-      <!--
-        ===== giscus 配置说明（需仓库所有者在本机 GitHub 操作）=====
-        1) 打开仓库 liubin8199-1/lottery-refute，开启 Discussions 功能（Settings → General → Features → Discussions）；
-        2) 安装 giscus GitHub App 并授权该仓库：https://giscus.app/zh-CN ；
-        3) 在 giscus 配置页选择分类「留言区」，复制 data-repo-id 与 data-category-id，回填下方两处占位。
-        填好之前留言区不会加载（显示 giscus 错误提示），属正常。
-      -->
-      <script src="https://giscus.app/client.js"
-              data-repo="liubin8199-1/lottery-refute"
-              data-repo-id="GISCUS_REPO_ID"
-              data-category="留言区"
-              data-category-id="GISCUS_CATEGORY_ID"
-              data-mapping="pathname"
-              data-strict="0"
-              data-reactions-enabled="1"
-              data-emit-metadata="0"
-              data-input-position="bottom"
-              data-theme="light"
-              data-lang="zh-CN"
-              crossorigin="anonymous"
-              async>
-      </script>
+      <div style="display:flex;flex-direction:column;gap:8px;max-width:540px">
+        <input id="gbName" type="text" placeholder="昵称（可选）" maxlength="20" style="padding:8px 10px;border:1px solid #d0d7de;border-radius:6px;font-size:14px">
+        <textarea id="gbText" rows="3" placeholder="说点什么…" style="padding:8px 10px;border:1px solid #d0d7de;border-radius:6px;font-size:14px;resize:vertical"></textarea>
+        <div style="display:flex;gap:10px;align-items:center">
+          <button id="gbSend" class="lab-btn" style="min-width:96px">发表留言</button>
+          <span id="gbHint" style="font-size:12px;color:#888"></span>
+        </div>
+      </div>
+      <div id="gbList" style="margin-top:16px;display:flex;flex-direction:column;gap:10px"></div>
+      <div id="gbEmpty" style="margin-top:12px;color:#999;font-size:13px">还没有留言，来抢沙发吧。</div>
     </div>
+    <p class="muted" style="font-size:12px;margin-top:10px;line-height:1.6">说明：本留言板为纯前端演示，留言仅保存在你当前浏览器（localStorage，键 <code>lottery_refute_guestbook_v1</code>）。特点：换设备 / 清除缓存会丢失，且<b>其他访客看不到彼此留言</b>。如需真正的多人互通评论区，可后续升级为 giscus（GitHub Discussions 托管）。</p>
   </section>
+
+  <script>
+  (function(){
+    var KEY='lottery_refute_guestbook_v1';
+    var nameEl=document.getElementById('gbName'),
+        textEl=document.getElementById('gbText'),
+        sendEl=document.getElementById('gbSend'),
+        hintEl=document.getElementById('gbHint'),
+        listEl=document.getElementById('gbList'),
+        emptyEl=document.getElementById('gbEmpty');
+    if(!textEl) return;
+    function load(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+    function save(a){ try{ localStorage.setItem(KEY, JSON.stringify(a)); }catch(e){} }
+    function fmt(ts){ var d=new Date(ts), p=function(n){return (n<10?'0':'')+n;};
+      return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes()); }
+    function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+    function render(){
+      var a=load();
+      listEl.innerHTML='';
+      emptyEl.style.display=a.length?'none':'block';
+      a.slice().reverse().forEach(function(it,idx){
+        var realIdx=a.length-1-idx;
+        var row=document.createElement('div');
+        row.style.cssText='border:1px solid #eaecef;border-radius:8px;padding:10px 12px;background:#fafbfc';
+        row.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">'+
+          '<b style="font-size:14px">'+esc(it.name||'匿名')+'</b>'+
+          '<span style="font-size:12px;color:#999">'+fmt(it.ts)+' · <a href="javascript:void(0)" data-i="'+realIdx+'" class="gbDel" style="color:#c33">删除</a></span></div>'+
+          '<div style="font-size:14px;line-height:1.6;white-space:pre-wrap;word-break:break-word">'+esc(it.text)+'</div>';
+        listEl.appendChild(row);
+      });
+    }
+    sendEl.onclick=function(){
+      var t=textEl.value.trim();
+      if(!t){ hintEl.textContent='写点内容再发～'; return; }
+      var a=load();
+      a.push({name:nameEl.value.trim()||'匿名', text:t, ts:Date.now()});
+      save(a); textEl.value=''; hintEl.textContent='已保存（仅本浏览器可见）';
+      render();
+    };
+    listEl.addEventListener('click',function(e){
+      var t=e.target;
+      if(t && t.className==='gbDel'){
+        var i=+t.getAttribute('data-i'), a=load();
+        a.splice(i,1); save(a); render();
+      }
+    });
+    render();
+  })();
+  </script>
 
 </main>
 
