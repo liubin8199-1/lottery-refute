@@ -49,6 +49,7 @@
       <a href="#myth">误区</a>
       <a href="#msg">留言区</a>
       <a href="#share">分享</a>
+      <button id="themeToggle" class="theme-toggle" type="button" title="切换浅色 / 暗色主题">🌙 暗色</button>
       <button id="modeToggle" class="nav-toggle" type="button">极简视图</button>
     </nav>
   </div>
@@ -57,13 +58,13 @@
 
     <div class="verdict">
       <div class="vd-row">
-        <div class="vd-big"><span class="vd-num">213</span><span class="vd-unit">条流行秘籍</span></div>
+        <div class="vd-big"><span class="vd-num">926</span><span class="vd-unit">条流行秘籍</span></div>
         <div class="vd-arrow">→</div>
         <div class="vd-big"><span class="vd-num vd-zero">0</span><span class="vd-unit">条通过检验</span></div>
       </div>
       <div class="vd-tagline">最高准确率 <b>≈</b> 随机蒙眼乱杀 —— 一条都没跑赢</div>
       <div class="vd-cmp" id="vdCmp"></div>
-      <div class="vd-foot">数据源：中彩中心官方 cwl 全量 <b>2059</b> 期（2013001~2026101）· <span class="term" data-tip="用第 i 期数据预测第 i+1 期，预测时看不到未来开奖，杜绝事后找规律。">一期前瞻回测</span> + <span class="term" data-tip="同时检验很多条公式时收紧显著门槛，防止纯运气撞出『显著』。">Bonferroni 多重比较校正</span></div>
+      <div class="vd-foot">三彩种合计：双色球 <b>213</b> + 福彩3D <b>27</b> + 六合彩 <b>686</b> 条 · 数据源：中彩中心官方 cwl 全量 <b>2059</b> 期 + 福彩3D 全量 <b>4696</b> 期 + 澳门六合彩 OOS <b>212</b> 期 · <span class="term" data-tip="用第 i 期数据预测第 i+1 期，预测时看不到未来开奖，杜绝事后找规律。">一期前瞻回测</span> + <span class="term" data-tip="同时检验很多条公式时收紧显著门槛，防止纯运气撞出『显著』。">Bonferroni 多重比较校正</span></div>
     </div>
     <p class="lead">我们把流传甚广的彩票杀号公式、预测秘籍，用官方全量历史开奖数据逐一做一期前瞻回测。
       结论高度一致：<b>全部等于闭眼随机排除一个号码</b>，没有一条能稳定识别开奖号码。</p>
@@ -136,6 +137,24 @@
       <div class="zchart-foot">
         <span><span class="mk"></span>显著阈值 |z|≈3.1（越过即"有效"，但 0 条越过）</span>
         <span class="mono">max|z| = 2.504</span>
+      </div>
+    </div>
+
+    <div class="card tech" style="margin-top:18px">
+      <h3 style="margin-top:0">三彩种合并全景：240 条逐条 |z| 落在哪里</h3>
+      <p class="muted" style="font-size:13px">把<b>双色球 213 条 + 福彩3D 27 条</b>（这 240 条都有逐条 |z| 明细）合并到同一坐标下对比。
+        绿柱＝两彩种合并后各桶的总条数，蓝柱＝双色球，橙柱＝福彩3D。竖虚线是 Bonferroni 阈值 <b>|z|≈3.1</b>。
+        <b>240 条全部落在阈值左侧，"≥3" 那一桶是 0</b> —— 两个彩种独立回测，结论完全一致。</p>
+      <div class="zc-legend">
+        <span class="lg"><span class="sw sw-merge"></span>合并总数（240 条）</span>
+        <span class="lg"><span class="sw sw-ssq"></span>双色球（213 条，max|z|=2.504）</span>
+        <span class="lg"><span class="sw sw-d3"></span>福彩3D（27 条，max|z|=2.414）</span>
+      </div>
+      <div id="zChartMerge" class="zchart"></div>
+      <div class="zc-hidden-note">
+        ⚠️ <b>口径诚实说明：</b>合并口径共 <b>926</b> 条秘籍，但本站只有 <b>240 条</b>（双色球 + 福彩3D）逐条记录了 |z|。
+        另 <b>686 条</b>六合彩杀肖公式为归档式证伪，公开口径只提供整体最大 |z| = <b>1.06</b>（观测漏杀率 92.3% vs 随机基线 91.6%，p=0.291，不显著），
+        <b>没有逐条明细</b>。因此本图<b>不把 686 条臆测摊进桶里</b> —— 宁可少画，不造假分布。
       </div>
     </div>
 
@@ -516,10 +535,11 @@
       a.slice().reverse().forEach(function(it,idx){
         var realIdx=a.length-1-idx;
         var row=document.createElement('div');
-        row.style.cssText='border:1px solid #eaecef;border-radius:8px;padding:10px 12px;background:#fafbfc';
+        row.className='gb-item';
+        row.style.cssText='border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--panel-soft)';
         row.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">'+
           '<b style="font-size:14px">'+esc(it.name||'匿名')+'</b>'+
-          '<span style="font-size:12px;color:#999">'+fmt(it.ts)+' · <a href="javascript:void(0)" data-i="'+realIdx+'" class="gbDel" style="color:#c33">删除</a></span></div>'+
+          '<span style="font-size:12px;color:var(--sub)">'+fmt(it.ts)+' · <a href="javascript:void(0)" data-i="'+realIdx+'" class="gbDel" style="color:var(--red)">删除</a></span></div>'+
           '<div style="font-size:14px;line-height:1.6;white-space:pre-wrap;word-break:break-word">'+esc(it.text)+'</div>';
         listEl.appendChild(row);
       });
@@ -563,6 +583,7 @@
 <script src="data/ssq.js"></script>
 <script src="data/fc3d.js"></script>
 <script src="data/lhc.js"></script>
+<script src="data/merged.js"></script>
 <script src="data/daily.js"></script>
 <script>
 (function renderDaily(){
@@ -626,9 +647,9 @@
   var D = window.SSQ_DATA;
   // KPI
   var k = document.getElementById('kpis');
-  [['已证伪方法', D.meta.total+' 条','覆盖双色球/3D/六合'],
+  [['已证伪方法', (window.MERGED_DATA&&window.MERGED_DATA.meta.total||D.meta.total)+' 条','三彩种合计 926'],
    ['最大 |z|', D.meta.maxz,'远低于显著阈值 ~3.1'],
-   ['过显著性阈值', '0 条','75+13+28+… 全部 = 随机'],
+   ['过显著性阈值', '0 条','213+27+686 全部 = 随机'],
    ['官方全量数据', '2059 期','双色球 cwl 全量 2013001~2026101']
   ].forEach(function(r){
     var d=document.createElement('div'); d.className='kpi';
@@ -696,6 +717,33 @@
     document.getElementById('zChart').innerHTML=
       '<div class="zc-plot"><div class="zc-cols">'+cols+'</div>'+
       '<div class="zc-thresh" style="left:'+threshPct+'%"><span>显著阈值 |z|≈3.1</span></div></div>';
+  })();
+
+  // ===== 三彩种合并全景直方图（数据源 data/merged.js）=====
+  (function renderZChartMerge(){
+    var el=document.getElementById('zChartMerge'); if(!el) return;
+    var M=window.MERGED_DATA; if(!M||!M.hist) return;
+    var H=M.hist, labels=H.labels, ssq=H.ssq, d3=H.fc3d, mg=H.merge;
+    // 以合并值定高度基准，保证视觉可比
+    var mx=Math.max.apply(null, mg)||1;
+    var cols='';
+    mg.forEach(function(c,i){
+      var hM=mx?Math.round(c/mx*100):0;
+      var hS=mx?Math.round(ssq[i]/mx*100):0;
+      var hD=mx?Math.round(d3[i]/mx*100):0;
+      cols+='<div class="zc-col">'+
+        '<div class="zc-pair">'+
+          '<div class="zc-bar'+(c===0?' zc-zero':'')+'" style="height:'+hM+'%;background:linear-gradient(180deg,#1a9d5a,#3fb950);max-width:22px" title="合并 '+c+' 条"><span class="zc-n">'+c+'</span></div>'+
+          '<div class="zc-bar'+(ssq[i]===0?' zc-zero':'')+'" style="height:'+hS+'%;max-width:15px" title="双色球 '+ssq[i]+' 条"></div>'+
+          '<div class="zc-bar'+(d3[i]===0?' zc-zero':'')+'" style="height:'+hD+'%;background:linear-gradient(180deg,#c8841a,#e0a23a);max-width:15px" title="福彩3D '+d3[i]+' 条"></div>'+
+        '</div>'+
+        '<div class="zc-x">'+labels[i]+'</div></div>';
+    });
+    var threshPct=6/7*100;
+    el.innerHTML='<div class="zc-plot"><div class="zc-cols grouped">'+cols+'</div>'+
+      '<div class="zc-thresh" style="left:'+threshPct+'%"><span>显著阈值 |z|≈3.1</span></div></div>'+
+      '<div class="zchart-foot"><span>共 '+H.n_detail+' 条逐条 |z| 明细 · "≥3" 桶 = <b>0</b> 条</span>'+
+      '<span class="mono">max|z| = '+(2.504).toFixed(3)+'（双色球）</span></div>';
   })();
 
   // 随机基线子弹图：每个类别的 lift 范围 vs 基线 1.000
@@ -1075,6 +1123,17 @@
         if(ok===K) cntAll++;
       }
       var theory=N*Math.pow(p,K);
+      var pAll=Math.pow(p,K);            // 单人 K 期全对概率
+      var pAll10=Math.pow(p,10);         // 单人 10 期全对概率（PPT 口径对照）
+      var theory10=N*pAll10;             // 10 期口径的期望人数
+      // 视觉对照：实测全对人数 vs 理论期望（同一轨道，最大值定标）
+      var scaleMax=Math.max(cntAll, theory, 1);
+      function simBar(name,val,cls){
+        var w=Math.max(1.2, Math.min(100, val/scaleMax*100));
+        return '<div class="sim-bar"><div class="sim-bar-name">'+name+'</div>'+
+          '<div class="sim-bar-track"><div class="sim-bar-fill '+cls+'" style="width:'+w.toFixed(1)+'%"></div></div>'+
+          '<div class="sim-bar-val">'+val.toFixed(1)+'</div></div>';
+      }
       out.innerHTML=
         '<div class="lab-grid">'+
           '<div class="lab-stat"><div class="lv">'+(best*100).toFixed(1)+'%</div><div class="ll">这群人里的最高准确率</div></div>'+
@@ -1082,11 +1141,20 @@
           '<div class="lab-stat"><div class="lv">'+cntAll+'</div><div class="ll">'+K+' 期<b>全对</b>的人数</div></div>'+
           '<div class="lab-stat"><div class="lv">'+theory.toFixed(1)+'</div><div class="ll">理论期望全对人数</div></div>'+
         '</div>'+
+        simBar('实测全对', cntAll, 'sim-real')+
+        simBar('理论期望', theory, 'sim-theory')+
         '<div class="lab-verdict no">这 '+N+' 个人<b>没有任何技巧，全靠瞎蒙</b>，却有 <b>'+cnt95+'</b> 人做到 ≥95% 准确率、'+
         '<b>'+cntAll+'</b> 人做到 '+K+' 期全对。他们中任何一个只要开个直播，就是你看到的"期期准"神话。</div>'+
+        '<div class="sim-theory">'+
+          '<div class="st"><div class="sv">'+(p*100).toFixed(2)+'%</div><div class="sl">单期猜对概率（15/16）</div></div>'+
+          '<div class="st"><div class="sv">'+(pAll10*100).toFixed(2)+'%</div><div class="sl">单人 10 期全对概率</div></div>'+
+          '<div class="st hl"><div class="sv">'+theory10.toFixed(1)+'</div><div class="sl">'+N+' 人里 10 期全对的期望人数</div></div>'+
+        '</div>'+
         '<div class="lab-note">模拟参数：人数 '+N+' · 期数 '+K+' · 单期猜对概率 '+(p*100).toFixed(2)+
-        '%（= 随机杀 1 个蓝球的基线准确率 15/16）。单人 '+K+' 期全对的理论概率 = <b>'+(Math.pow(p,K)*100).toFixed(3)+
-        '%</b>，乘以 '+N+' 人 ≈ 期望 <b>'+theory.toFixed(1)+'</b> 人。</div>';
+        '%（= 随机杀 1 个蓝球的基线准确率 15/16）。单人 '+K+' 期全对的理论概率 = <b>'+(pAll*100).toFixed(3)+
+        '%</b>，乘以 '+N+' 人 ≈ 期望 <b>'+theory.toFixed(1)+'</b> 人。'+
+        '对照经典口径：<b>1000 人各蒙 10 期，期望仍有 ≈ '+Math.round(1000*pAll10)+' 人全对</b>（1000×0.9375¹⁰ ≈ '+(1000*pAll10).toFixed(0)+
+        '）—— 这 '+Math.round(1000*pAll10)+' 个人就是你会在短视频里刷到的"十期全中大师"。</div>';
     };
   })();
 
@@ -1173,12 +1241,12 @@
       if(isH){h++;s++;}else{s=0;}
       ct.textContent=t; ch.textContent=h; cs.textContent=s;
       cf.textContent=isH?'正':'反';
-      cf.style.background=isH?'#e7f6ee':'#fdeaea';
-      cf.style.color=isH?'#1a9d5a':'#d83333';
+      cf.style.background=isH?'var(--brand-soft)':'var(--brand-soft)';
+      cf.style.color=isH?'var(--green)':'var(--red)';
     }
     document.getElementById('coinFlip').onclick=flip;
     document.getElementById('coinRun').onclick=function(){for(var i=0;i<20;i++)flip();};
-    document.getElementById('coinReset').onclick=function(){t=0;h=0;s=0;ct.textContent='0';ch.textContent='0';cs.textContent='0';cf.textContent='—';cf.style.background='#f1f5fa';cf.style.color='var(--ink)';};
+    document.getElementById('coinReset').onclick=function(){t=0;h=0;s=0;ct.textContent='0';ch.textContent='0';cs.textContent='0';cf.textContent='—';cf.style.background='var(--track)';cf.style.color='var(--ink)';};
   }
 
   // 极简/大众视图切换（localStorage 记忆）
@@ -1198,6 +1266,22 @@
     applyMode(next);
     try{ localStorage.setItem(KEY, next?'simple':'full'); }catch(e){}
     window.scrollTo({top:0,behavior:'smooth'});
+  };
+
+  // ===== 浅色 / 暗色主题切换（localStorage 记忆；默认浅色，不跟随系统以免吓到访客）=====
+  var TKEY='lottery_refute_theme', tbtn=document.getElementById('themeToggle');
+  function applyTheme(dark){
+    document.body.classList.toggle('dark', dark);
+    if(tbtn) tbtn.textContent= dark ? '☀️ 浅色' : '🌙 暗色';
+    var meta=document.querySelector('meta[name="theme-color"]');
+    if(meta) meta.setAttribute('content', dark ? '#0D1117' : '#1f6feb');
+  }
+  var themeSaved=(function(){try{return localStorage.getItem(TKEY);}catch(e){return null;}})()==='dark';
+  applyTheme(themeSaved);
+  if(tbtn) tbtn.onclick=function(){
+    var next=!document.body.classList.contains('dark');
+    applyTheme(next);
+    try{ localStorage.setItem(TKEY, next?'dark':'light'); }catch(e){}
   };
 })();
 </script>

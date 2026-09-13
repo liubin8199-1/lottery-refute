@@ -5,3 +5,13 @@ _verify.js
 # 临时抓取/校验产物
 live_*.html
 _raw_check.html
+
+# 改版工作产物（本地预览/回滚备份），不进仓库
+_backup_pre_*/
+_preview/
+_save/
+_verify.cjs
+_final_check.cjs
+_mob*.cjs
+_shot_*.png
+_orig/
