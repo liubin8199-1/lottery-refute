@@ -41,6 +41,7 @@
     <nav class="nav">
       <a href="#stand">立场与方法</a>
       <a href="#ssq">双色球</a>
+      <a href="#github">GitHub 策略审计</a>
       <a href="#lab">互动实验室</a>
       <a href="#d3">福彩3D</a>
       <a href="#lhc">六合彩</a>
@@ -563,6 +564,51 @@
   })();
   </script>
 
+  <!-- GitHub 策略审计 -->
+  <section id="github">
+    <h2><img class="sec-icon" src="assets/icon-ssq.svg" alt="">GitHub 策略审计 <span class="tag">14 仓库 · 全 = 随机</span></h2>
+    <p class="sub">把 GitHub 上开源的双色球选号策略仓库（热冷号 / 频率 / 时序 / 机器学习 / 强化学习 / LLM 全覆盖）克隆下来，用<span class="term" data-tip="第 t 期只用 ≤t 的历史构造策略或训练模型，预测第 t+1 期，预测时看不到未来开奖。杜绝事后找规律。">防泄漏滚动回测</span>真跑一遍。结论与本站「83 法全证伪 / 9 策略 max|z|&lt;2.99 / 追踪闭环 max|z|&lt;1.7」完全一致：<b>开源策略同样没有 alpha</b>。</p>
+
+    <div class="grid2">
+      <div class="card" id="ghScale"></div>
+      <div class="card">
+        <h3 style="margin-top:0">总判定</h3>
+        <ul id="ghVerdict" style="margin:0;padding-left:18px"></ul>
+        <p class="muted" style="font-size:13px;margin-top:8px">方法红线：|z|≥<b>2.81</b>（Bonferroni）才显著；三探针（热冷 z 检验 / 策略真跑 / 时序 ML 探针）最大 |z| 仅 <b>0.68</b>，远低于阈值。</p>
+      </div>
+    </div>
+
+    <div class="card tech" style="margin-top:18px">
+      <h3 style="margin-top:0">三探针证据（A 热冷 z 检验 / B 策略真跑 / C 时序 ML / D 伪证剖析）</h3>
+      <p class="muted" style="font-size:13px">全部在官方 cwl 全量 2070 期（及仓库自带 / yangusrname 1879 期）上、用开奖前数据窗口滚动回测，绝不窥探未来。</p>
+      <div id="ghProbes"></div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h3 style="margin-top:0">14 个仓库审计档案</h3>
+      <p class="muted" style="font-size:13px">「实测结论」列：≈随机 / =随机 表示经回测无超越随机的预测力；「离线不可跑 / 前提被覆盖」表示该仓库逻辑已被统一审计前提证伪。</p>
+      <div style="max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:12px;margin-top:12px">
+        <table id="ghTbl" style="width:100%;border-collapse:collapse">
+          <thead><tr>
+            <th style="text-align:left;padding:8px 10px;position:sticky;top:0;background:var(--card)">#</th>
+            <th style="text-align:left;padding:8px 10px;position:sticky;top:0;background:var(--card)">仓库</th>
+            <th style="text-align:left;padding:8px 10px;position:sticky;top:0;background:var(--card)">策略类型</th>
+            <th style="text-align:left;padding:8px 10px;position:sticky;top:0;background:var(--card)">是否真跑</th>
+            <th style="text-align:left;padding:8px 10px;position:sticky;top:0;background:var(--card)">实测结论</th>
+          </tr></thead>
+          <tbody id="ghTbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:18px">
+      <b>为什么「看起来很准」的开源项目也是假的？</b>
+      双色球为 <b>iid 纯随机摇号</b>，历史号码之间无相关、无趋势、无可学结构。部分仓库用「自定评分 / 极小样本（n=2）/ cherry-pick 命中」包装出"高准确率"——例如 LJQ-HUB-cmyk/SSQ 自带回测仅 <b>2 期</b>、自定"60 分"评分，属典型伪证特征。
+      只要用开奖前数据窗口做防泄漏滚动回测，任何"统计 / AI / RL / LLM"选号的期望命中都<b>恒等于随机基线</b>（单注红球≈1.09、6+1 中头奖概率 1/17,721,088）。
+      <b>我们不把它当作规律，也不下注。</b>
+    </div>
+  </section>
+
 </main>
 
 <footer>
@@ -585,6 +631,7 @@
 <script src="data/lhc.js"></script>
 <script src="data/merged.js"></script>
 <script src="data/daily.js"></script>
+<script src="data/github_strategies.js"></script>
 <script>
 (function renderDaily(){
   function set(id,v){ var el=document.getElementById(id); if(el) el.textContent=v; }
@@ -1283,6 +1330,62 @@
     applyTheme(next);
     try{ localStorage.setItem(TKEY, next?'dark':'light'); }catch(e){}
   };
+})();
+</script>
+<script>
+(function(){
+  var D = window.GH_DATA; if(!D) return;
+  // 规模卡片
+  var sc = document.getElementById('ghScale');
+  if(sc){
+    sc.innerHTML = '<h3 style="margin-top:0">数据规模</h3>' +
+      D.scale.map(function(s){
+        return '<div class="stat"><span class="v">'+s.v+(s.u?(' '+s.u):'')+'</span><span class="u">'+s.c+'</span></div>';
+      }).join('') +
+      '<p class="muted" style="font-size:13px;margin-top:8px">口径：'+D.meta.note+'。更新：'+D.meta.updated+'。</p>';
+  }
+  function stat(v,u,c){ return '<div class="stat"><span class="v">'+v+'</span><span class="u">'+u+' · '+c+'</span></div>'; }
+  // 总判定
+  var vd = document.getElementById('ghVerdict');
+  if(vd){
+    D.verdict_summary.forEach(function(r){
+      var li = document.createElement('li');
+      li.innerHTML = '<b>'+r[0]+'</b>：'+r[1];
+      vd.appendChild(li);
+    });
+  }
+  // 三探针证据卡片
+  var gp = document.getElementById('ghProbes');
+  if(gp){
+    D.probes.forEach(function(p){
+      var card = document.createElement('div');
+      card.className = 'card';
+      card.style.marginTop = '14px';
+      var rows = p.rows.map(function(r){
+        return '<tr>'+r.map(function(c,i){
+          return '<td style="padding:6px 8px;border-top:1px solid var(--line)">'+(i===r.length-1?'<b>'+c+'</b>':c)+'</td>';
+        }).join('')+'</tr>';
+      }).join('');
+      card.innerHTML = '<h4 style="margin:0 0 8px">探针 '+p.key+' · '+p.title+'</h4>' +
+        '<table style="width:100%;border-collapse:collapse;font-size:13px">' +
+        '<thead><tr>'+p.head.map(function(h){return '<th style="text-align:left;padding:6px 8px;color:var(--muted)">'+h+'</th>';}).join('')+'</tr></thead>' +
+        '<tbody>'+rows+'</tbody></table>';
+      gp.appendChild(card);
+    });
+  }
+  // 14 仓库档案表
+  var tb = document.getElementById('ghTbody');
+  if(tb){
+    D.repos.forEach(function(r,i){
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td style="padding:7px 10px;color:var(--muted)">'+(i+1)+'</td>' +
+        '<td style="padding:7px 10px"><code style="font-size:12px">'+r.name+'</code></td>' +
+        '<td style="padding:7px 10px">'+r.type+'</td>' +
+        '<td style="padding:7px 10px">'+r.ran+'</td>' +
+        '<td style="padding:7px 10px"><b>'+r.concl+'</b></td>';
+      tb.appendChild(tr);
+    });
+  }
 })();
 </script>
 </body>
