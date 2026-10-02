@@ -579,13 +579,13 @@
     </div>
 
     <div class="card tech" style="margin-top:18px">
-      <h3 style="margin-top:0">三探针证据（A 热冷 z 检验 / B 策略真跑 / C 时序 ML / D 伪证剖析）</h3>
-      <p class="muted" style="font-size:13px">全部在官方 cwl 全量 2070 期（及仓库自带 / yangusrname 1879 期）上、用开奖前数据窗口滚动回测，绝不窥探未来。</p>
+      <h3 style="margin-top:0">六探针证据（A 热冷 z / B 策略真跑 / C 时序 ML / D 伪证剖析 / E 诚实框架 / F 公式级实证）</h3>
+      <p class="muted" style="font-size:13px">全部在官方 cwl 全量 2071 期（及仓库自带 / yangusrname 1879 期）上、用开奖前数据窗口滚动回测，绝不窥探未来。探针 F 对视频《如何在家计算彩票漏洞》所展示的 20 个概率论公式逐条实算，结论全部指向"无漏洞可算"。</p>
       <div id="ghProbes"></div>
     </div>
 
     <div class="card" style="margin-top:18px">
-      <h3 style="margin-top:0">14 个仓库审计档案</h3>
+      <h3 style="margin-top:0">15 个仓库审计档案</h3>
       <p class="muted" style="font-size:13px">「实测结论」列：≈随机 / =随机 表示经回测无超越随机的预测力；「离线不可跑 / 前提被覆盖」表示该仓库逻辑已被统一审计前提证伪。</p>
       <div style="max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:12px;margin-top:12px">
         <table id="ghTbl" style="width:100%;border-collapse:collapse">
@@ -613,6 +613,8 @@
       关键结论：<b>这个仓库自己就承认无漏洞可算</b>——其方法论文档用贝叶斯证明"后验=先验、历史对下一期零信息增益"，蒙特卡洛 20 万次模拟显示"中一等奖≈0"，仅优化覆盖广度/末等奖保底率等娱乐维度。
       我们用官方 2071 期数据独立复跑其方法类：红热 z=+0.026、蓝冷 z=+0.407、最大|自相关|=0.068，<b>三项均远低于 Bonferroni 阈值 2.81</b>。
       即：再精巧的"运算分析"也只优化号码分布，动不了 1/17,721,088 的头奖概率。<b>双色球没有漏洞可算。</b>
+      <br><br>
+      <b>视频公式级证伪（20 个公式逐条实算）：</b> 视频闪过的 20 个概率论公式数学上<b>无一错误</b>，方向却全反——它们是"双色球无漏洞"的证明，而非"算漏洞"的方法。用官方 2071 期逐条实算：超几何给出头奖观测 <b>0 次</b>（期望 0.00012）、独立事件自相关 |r|≤<b>0.038</b>、t 检验红号最大 |t|=<b>2.875</b>、卡方均匀性红 χ²=<b>51.0</b>(临界46.2)/蓝 14.8(临界25.0)、切比雪夫最大偏离 <b>2.87σ</b>（上界≤12.1%）、大数定律频率收敛到 6/33——<b>没有一条能导出"可中头奖的漏洞"</b>。真数学 + 反方向叙事 = <b>数学伪装（mathwashing）</b>；逐条证据见上方<b>探针 F</b>。
     </div>
   </section>
 
@@ -1380,7 +1382,7 @@
       gp.appendChild(card);
     });
   }
-  // 14 仓库档案表
+  // 15 仓库档案表
   var tb = document.getElementById('ghTbody');
   if(tb){
     D.repos.forEach(function(r,i){
