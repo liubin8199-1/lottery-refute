@@ -4,20 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>开奖即随机 · 彩票伪证档案库</title>
-<meta name="description" content="用全量历史开奖数据回测证伪每一个'稳赚不赔'的彩票秘籍。双色球、福彩3D、六合彩，全部归随机。">
+<meta name="description" content="用全量历史开奖数据回测证伪每一个'稳赚不赔'的彩票秘籍：926 条公式全部归随机，0 条通过显著性检验；并算清 11 种玩法的赔率抽水与保本门槛，9 种期望值为负。反智商税，理性看待博彩。">
 <meta name="theme-color" content="#1f6feb">
 <meta property="og:type" content="website">
 <meta property="og:title" content="开奖即随机 · 彩票伪证档案库">
-<meta property="og:description" content="双色球213条杀号公式全量回测，0条过显著性检验——全部等于闭眼随机排除一个号码。反智商税，理性购彩。">
+<meta property="og:description" content="926 条流行秘籍全量回测，0 条过显著性检验；11 种玩法赔率算清，9 种期望值为负、唯一公平定价的那种恰好为 0。两层结论，同一个答案：不参与。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://liubin8199-1.github.io/lottery-refute/assets/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="开奖即随机 · 彩票伪证档案库">
-<meta name="twitter:description" content="双色球213条杀号公式全量回测，0条过显著性检验，全部=随机。">
+<meta name="twitter:description" content="926 条秘籍 0 条显著；11 种玩法 9 种期望值为负。开奖随机 + 定价抽水，两层都是坏消息。">
 <meta name="twitter:image" content="https://liubin8199-1.github.io/lottery-refute/assets/og.png">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=20261102">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -44,6 +44,7 @@
       <a href="#github">GitHub 策略审计</a>
       <a href="#lab">互动实验室</a>
       <a href="#d3">福彩3D</a>
+      <a href="#edge">抽水门槛</a>
       <a href="#lhc">六合彩</a>
       <a href="#daily">每日观测</a>
       <a href="#qa">答疑</a>
@@ -66,7 +67,12 @@
       <div class="vd-tagline">最高准确率 <b>≈</b> 随机蒙眼乱杀 —— 一条都没跑赢</div>
       <div class="vd-cmp" id="vdCmp"></div>
       <div class="vd-foot">三彩种合计：双色球 <b>213</b> + 福彩3D <b>27</b> + 六合彩 <b>686</b> 条 · 数据源：中彩中心官方 cwl 全量 <b>2059</b> 期 + 福彩3D 全量 <b>4696</b> 期 + 澳门六合彩 OOS <b>212</b> 期 · <span class="term" data-tip="用第 i 期数据预测第 i+1 期，预测时看不到未来开奖，杜绝事后找规律。">一期前瞻回测</span> + <span class="term" data-tip="同时检验很多条公式时收紧显著门槛，防止纯运气撞出『显著』。">Bonferroni 多重比较校正</span></div>
+      <div class="vd-foot" style="margin-top:12px;border-top:1px solid rgba(255,255,255,.16);padding-top:11px">
+        <b>第二层结论：就算能预测，也赢不了。</b>11 种玩法的赔率与保本门槛已全部算清——9 种期望值为负（隐性抽水 <b>0.46%~21.48%</b>），
+        唯一按公平价定价的玩法期望值恰好为 <b>0</b>。<a href="#edge" style="color:#9dc4ff;font-weight:700">查看完整算表 →</a>
+      </div>
     </div>
+
     <p class="lead">我们把流传甚广的彩票杀号公式、预测秘籍，用官方全量历史开奖数据逐一做一期前瞻回测。
       结论高度一致：<b>全部等于闭眼随机排除一个号码</b>，没有一条能稳定识别开奖号码。</p>
 
@@ -288,6 +294,76 @@
     </div>
   </section>
 
+  <!-- 抽水与保本门槛（跨玩法通用） -->
+  <section id="edge">
+    <h2><img class="sec-icon" src="assets/icon-lhc.svg" alt="">抽水与保本门槛 <span class="tag">11 种玩法 · 全部算清</span></h2>
+    <p class="sub">前面几节证明的是「开奖是随机的」。这一节换一个更狠的角度：<b>假设你真的能预测，能不能赢？</b>
+      答案由赔率定价决定——每种玩法都有一条「保本线」，你必须比闭眼随机更准，才能跨过去。
+      下表全部由组合数 <span class="mono">C(49,7)</span> 直接算出，<b>任何人可以自己验算</b>。</p>
+
+    <div class="callout" style="margin:20px 0 6px;font-size:15px;line-height:1.75">
+      <b>先说结论：</b>门槛最低的玩法是特码——赔率 46 倍，保本线 2.174%，随机水平 2.041%，
+      你只需要比闭眼乱买<b>准 0.13 个百分点</b>就能不亏。听起来几乎不算门槛。
+      但我们用 <b>686 条杀肖公式</b>做了 212 期样本外回放、<b>359 条杀号候选</b>做了受控挖掘，经 Bonferroni 多重比较修正后
+      <b>0 条显著</b>——连这 0.13 个百分点都没拿到。
+      而门槛最高的 5 不中，需要比随机准 <b>10.95 个百分点</b>。
+    </div>
+
+    <div class="card tech" style="margin-top:18px">
+      <h3 style="margin-top:0">保本门槛缺口：必须比随机准多少，才不亏</h3>
+      <p class="muted" style="font-size:13px">
+        横条长度 = <b>保本所需胜率 − 随机胜率</b>（单位：百分点）。正值表示该玩法<b>必须比闭眼随机更准</b>才有机会不亏；
+        长度为 0 表示定价恰好公平；负值表示赔率给高了（几乎必然是口径错配，见下方说明）。
+      </p>
+      <div id="edgeBars" style="margin-top:14px"></div>
+      <div class="zchart-foot" style="margin-top:14px">
+        <span><span class="mk" style="border-top-color:#d83333"></span>门槛最高（≥6pp）</span>
+        <span><span class="mk" style="border-top-color:#c8841a"></span>中等（1~6pp）</span>
+        <span><span class="mk" style="border-top-color:#1f6feb"></span>很低（&lt;1pp）</span>
+        <span><span class="mk" style="border-top-color:#1a9d5a"></span>公平定价（缺口 = 0）</span>
+        <span class="mono">口径：EV% = 胜率 × 赔率 − 1</span>
+      </div>
+    </div>
+
+    <div class="grid2" style="margin-top:18px" id="edgeInsights"></div>
+
+    <div class="card" style="margin-top:18px">
+      <h3 style="margin-top:0">完整算表（11 种玩法）</h3>
+      <p class="muted" style="font-size:13px">
+        「随机胜率」= 该玩法的中奖条件在 C(49,7) 种等可能组合中占的比例，即<b>不靠任何预测、闭眼买</b>的胜率。
+        「保本需」= 1 ÷ 赔率。两者之差就是你必须靠「本事」补上的部分。
+      </p>
+      <div style="overflow:auto;border:1px solid var(--line);border-radius:12px;margin-top:12px">
+        <table id="tblEdge">
+          <thead><tr>
+            <th style="width:126px">玩法</th>
+            <th style="width:76px">类别</th>
+            <th style="width:80px">赔率(倍)</th>
+            <th style="width:92px">随机胜率(%)</th>
+            <th style="width:84px">EV(%)</th>
+            <th style="width:92px">保本需(%)</th>
+            <th style="width:92px">缺口(pp)</th>
+            <th>计算依据</th>
+          </tr></thead>
+          <tbody id="tbodyEdge"></tbody>
+        </table>
+      </div>
+      <div class="disc" id="edgeDisc"></div>
+    </div>
+
+    <div class="callout" style="margin-top:18px">
+      <b>关于「三中三」那个唯一为正的数字：</b>按字面赔率（550 倍）算，EV = <span class="mono">+4.48%</span>。
+      本站<b>不认为这是可利用的漏洞</b>，理由有三：①它极可能是「净赔」与「总返还」口径混淆；
+      ②大额组合投注通常另有封顶或降率条款；③若实为「净赔 550」即总返还 551，字面 EV 才成立，而多数渠道不这么给。
+      <b>凡是「算出来是正的」的玩法，第一反应应该是回去核对条款，而不是掏钱</b>——这条经验比这张表值钱。
+    </div>
+
+    <div class="disc" style="margin-top:12px">
+      本节只做赔率定价的数学核算，不提供任何投注建议、不推荐任何渠道、不引导参与任何博彩。
+      当玩的期望值恒为负时，唯一不亏的选项是不参与——这也是本站全部内容的结论。
+    </div>
+  </section>
+
   <!-- 六合彩 -->
   <section id="lhc">
     <h2><img class="sec-icon" src="assets/icon-lhc.svg" alt="">六合彩（澳门） <span class="tag">已证伪 686 法 · OOS 212 期</span></h2>
@@ -308,6 +384,15 @@
       <div class="zchart-foot">
         <span><span class="mk"></span>显著阈值 |z|≈3.1（0 条越过）</span>
         <span class="mono">max|z| = <span id="lhcMaxz">1.06</span></span>
+      </div>
+    </div>
+
+    <div class="card tech" style="margin-top:18px">
+      <h3 style="margin-top:0" id="obsTitle">一个「看起来有 30 个百分点优势」的信号，是怎么自己消失的</h3>
+      <p class="muted" style="font-size:13px" id="obsWhat"></p>
+      <div id="obsCurve"></div>
+      <div class="callout" style="margin-top:14px;background:var(--chip);border-left-color:var(--amber)">
+        <span id="obsVerdict" style="font-size:13.5px;line-height:1.72"></span>
       </div>
     </div>
 
@@ -467,6 +552,59 @@
       <h3 style="margin-top:0">③ 它和"秘籍"有什么关系？</h3>
       <p class="muted">所有"追热号""杀冷号""对称码""遗漏值"类秘籍，本质都是在赌徒谬误上做文章：<b>误以为过去的开奖能"预示"未来</b>。但开奖是独立事件，过去无法预示未来，于是这些秘籍的命中率，最终都回归到"闭眼随机"。这也正是本站 213+27+686 条回测全死的数学根源。</p>
       <div class="lab-note">想亲手验证？回到上方「<a href="#lab">秘籍粉碎机</a>」，随便选一条规则跑 2059 期——它的漏杀率和随机基线一模一样。</div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h3 style="margin-top:0">④ 一个更隐蔽的误区：口径反转——同一批数据，能同时算出「全灭」和「全中」</h3>
+      <p class="muted">这是本站自己踩过的坑，也是「连中 X 期」类宣传最常见的技术来源。<b>问题不在数据，在记法。</b></p>
+      <p class="muted">以本站记录的某一期真实开奖为例（特码 <b>15</b>，属龙、水行、蓝波单数、1 字头、尾 5、6 合），同一套 10 项「杀号参考」可以有两种完全相反的记法：</p>
+
+      <div style="overflow:auto;border:1px solid var(--line);border-radius:12px;margin:14px 0">
+        <table>
+          <thead><tr>
+            <th style="width:34%">这一期的 10 项杀号参考</th>
+            <th style="width:22%">口径 A：杀中了算对</th>
+            <th style="width:22%">口径 B：没杀中算对</th>
+            <th>两种记法在说什么</th>
+          </tr></thead>
+          <tbody>
+            <tr><td>杀肖 狗马蛇鸡鼠 / 猪鼠牛 / 狗马蛇</td><td class="mono"><span class="badge b-red">✗ 都没杀中龙</span></td><td class="mono"><span class="badge b-green">✓ 龙确实没被排掉</span></td><td class="muted" style="font-size:13px">杀集没覆盖到龙 → A 判失灵，B 判精准</td></tr>
+            <tr><td>杀一头 0 字头 / 杀一行 土行</td><td class="mono"><span class="badge b-red">✗ 15 是 1 字头、水行</span></td><td class="mono"><span class="badge b-green">✓ 确实没排到 15</span></td><td class="muted" style="font-size:13px">同上</td></tr>
+            <tr><td>杀尾 9/0、4/2/8、2/4/0</td><td class="mono"><span class="badge b-red">✗ 15 尾数是 5</span></td><td class="mono"><span class="badge b-green">✓ 确实没排到尾 5</span></td><td class="muted" style="font-size:13px">同上</td></tr>
+            <tr><td>杀半波 绿双 / 杀一合 13 合</td><td class="mono"><span class="badge b-red">✗ 15 是蓝单、6 合</span></td><td class="mono"><span class="badge b-green">✓ 确实没排到</span></td><td class="muted" style="font-size:13px">同上</td></tr>
+            <tr style="background:var(--chip)"><td><b>合计</b></td><td class="mono"><b><span class="badge b-red">0 / 10</span></b></td><td class="mono"><b><span class="badge b-green">10 / 10</span></b></td><td class="muted" style="font-size:13px"><b>同一批数字，一个「十项全灭」，一个「十项全中」</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout" style="margin-top:6px">
+        <b>为什么口径 B 的「全中」一文不值：</b>它统计的是「这个杀集有没有误伤真号码」。而 10 项参考里，任何一项覆盖的号码都只有 4~16 个（49 个里的少数），
+        <b>随机情况下「没误伤」本来就是大概率事件</b>。10 项全部没误伤，等于这 10 项什么都没排掉——账面上 10/10 满分，实际贡献为零。
+        <b>「杀得准」和「杀得有用」是两件完全不同的事。</b>
+      </div>
+
+      <h3 style="margin-top:22px">看到「连中 N 期」，先问四个问题</h3>
+      <div class="grid2" style="margin-top:8px">
+        <div class="card">
+          <p class="muted" style="margin:0 0 8px"><b>① 基线是多少？</b></p>
+          <p class="muted" style="margin:0;font-size:13px">一个每次都能「中」的规则，它的随机基线可能本来就是 89%。<b>不给基线的命中率，等于不给分母的分数。</b></p>
+        </div>
+        <div class="card">
+          <p class="muted" style="margin:0 0 8px"><b>② 一共试了多少条？</b></p>
+          <p class="muted" style="margin:0;font-size:13px">试 100 条规则，必有一条「连中 10 期」。这叫多重比较，不叫本事。<b>没告诉你试了多少条的"战绩"，无法评价。</b></p>
+        </div>
+        <div class="card">
+          <p class="muted" style="margin:0 0 8px"><b>③ 有没有样本外？</b></p>
+          <p class="muted" style="margin:0;font-size:13px">在已经看过的历史上「连中」，和从没看过的期数上「连中」，是两回事。<b>只有后者算证据。</b></p>
+        </div>
+        <div class="card">
+          <p class="muted" style="margin:0 0 8px"><b>④ 这份记录是不是事后挑的？</b></p>
+          <p class="muted" style="margin:0;font-size:13px">「最近 10 期」这四个字是可以移动的。把窗口左右挪几次，总能找到一段好看的。<b>要求给出全部历史，别只看截图。</b></p>
+        </div>
+      </div>
+      <div class="lab-note" style="margin-top:12px">
+        这四问不需要任何数学基础，但能拆掉绝大多数「秘籍」宣传。本站自己的统计全部同时给出<b>基线、样本量、检验方法与 p 值</b>，就是为了让读者能用同一套标准来审我们。
+      </div>
     </div>
   </section>
 
@@ -646,13 +784,14 @@
   </div>
 </footer>
 
-<script src="data/draws.js"></script>
-<script src="data/ssq.js"></script>
-<script src="data/fc3d.js"></script>
-<script src="data/lhc.js"></script>
-<script src="data/merged.js"></script>
-<script src="data/daily.js"></script>
-<script src="data/github_strategies.js"></script>
+<script src="data/draws.js?v=20261102"></script>
+<script src="data/ssq.js?v=20261102"></script>
+<script src="data/fc3d.js?v=20261102"></script>
+<script src="data/house_edge.js?v=20261102"></script>
+<script src="data/lhc.js?v=20261102"></script>
+<script src="data/merged.js?v=20261102"></script>
+<script src="data/daily.js?v=20261102"></script>
+<script src="data/github_strategies.js?v=20261102"></script>
 <script>
 (function renderDaily(){
   function set(id,v){ var el=document.getElementById(id); if(el) el.textContent=v; }
@@ -986,6 +1125,70 @@
     render();
   })();
 
+  // ===== 抽水与保本门槛 渲染 =====
+  (function renderEdge(){
+    var E = window.HOUSE_EDGE; if(!E) return;
+
+    // 保本门槛缺口 横条图
+    (function(){
+      var el = document.getElementById('edgeBars'); if(!el) return;
+      var rows = E.rows.slice().sort(function(a,b){ return b.gap - a.gap; });
+      var mx = rows.reduce(function(m,r){ return Math.max(m, r.gap); }, 0) || 1;
+      function color(g){
+        if(g < -0.001) return 'linear-gradient(90deg,#b8c6da,#94a8c4)';  // 负值=口径存疑，灰
+        if(g <= 0.001) return 'linear-gradient(90deg,#1a9d5a,#3fbe7e)';  // 公平
+        if(g < 1)      return 'linear-gradient(90deg,#3a86ff,#1f6feb)';  // 门槛很低
+        if(g < 6)      return 'linear-gradient(90deg,#e0a03a,#c8841a)';  // 中等
+        return 'linear-gradient(90deg,#e2554f,#d83333)';                 // 最狠
+      }
+      el.innerHTML = rows.map(function(r){
+        var w = Math.max(1.5, Math.abs(r.gap) / mx * 100);
+        var pct = (r.gap >= 0 ? '+' : '') + r.gap.toFixed(2) + 'pp';
+        var tip = r.flag ? ' <span class="muted" style="font-size:11px">('+r.flag+')</span>' : '';
+        return '<div class="bar-wrap">'+
+          '<div class="bar-name" style="width:100px;flex-shrink:0">'+r.name+tip+'</div>'+
+          '<div class="bar-track"><div class="bar-fill" style="width:'+w.toFixed(1)+'%;background:'+color(r.gap)+'"></div></div>'+
+          '<div class="bar-val" style="width:72px;font-weight:700">'+pct+'</div>'+
+        '</div>';
+      }).join('');
+    })();
+
+    // 三个关键洞察
+    (function(){
+      var el = document.getElementById('edgeInsights'); if(!el) return;
+      el.innerHTML = E.insights.map(function(it){
+        return '<div class="card">'+
+          '<div class="muted" style="font-size:12px;letter-spacing:.05em">'+it.tag+'</div>'+
+          '<h3 style="margin:6px 0 2px;font-size:16px">'+it.head+'</h3>'+
+          '<div class="mono" style="font-size:23px;font-weight:800;color:var(--brand);margin:6px 0 8px">'+it.num+'</div>'+
+          '<p class="muted" style="font-size:13px;margin:0;line-height:1.68">'+it.body+'</p>'+
+        '</div>';
+      }).join('');
+    })();
+
+    // 完整算表
+    (function(){
+      var tb = document.getElementById('tbodyEdge'); if(!tb) return;
+      tb.innerHTML = E.rows.map(function(r){
+        var evCls  = r.ev > 0.01 ? 'b-amber' : (r.ev < -10 ? 'b-red' : 'b-gray');
+        var gapCls = r.gap < -0.001 ? 'b-gray'
+                   : (r.gap <= 0.001 ? 'b-green' : (r.gap >= 6 ? 'b-red' : 'b-gray'));
+        return '<tr>'+
+          '<td style="white-space:nowrap"><b>'+r.name+'</b>'+(r.flag ? ' <span class="badge b-gray" style="font-size:11px;padding:2px 6px">'+r.flag+'</span>' : '')+'</td>'+
+          '<td class="muted" style="font-size:13px">'+r.cat+'</td>'+
+          '<td class="mono">'+r.odds.toFixed(1)+'</td>'+
+          '<td class="mono">'+r.p.toFixed(2)+'</td>'+
+          '<td class="mono"><span class="badge '+evCls+'" style="white-space:nowrap">'+(r.ev>0?'+':'')+r.ev.toFixed(2)+'</span></td>'+
+          '<td class="mono">'+r.be.toFixed(2)+'</td>'+
+          '<td class="mono"><span class="badge '+gapCls+'" style="white-space:nowrap">'+(r.gap>=0?'+':'')+r.gap.toFixed(2)+'</span></td>'+
+          '<td class="muted mono" style="font-size:12px">'+r.basis+'</td>'+
+        '</tr>';
+      }).join('');
+      var d = document.getElementById('edgeDisc');
+      if(d) d.textContent = '共 '+E.rows.length+' 种玩法 · 口径：'+E.meta.method+' · 基准：'+E.meta.universe+' · 更新 '+E.meta.updated;
+    })();
+  })();
+
   // ===== 六合彩 渲染 =====
   (function renderLHC(){
     var L = window.LHC_DATA; if(!L) return;
@@ -1016,6 +1219,38 @@
         '<div style="text-align:center;font-size:12.5px;color:var(--sub);margin-top:10px">686 条公式的最大 |z| 仅为阈值的 '+(mx/th*100).toFixed(0)+'% —— 没有任何一条接近显著。</div>';
       var mz=document.getElementById('lhcMaxz'); if(mz) mz.textContent=mx.toFixed(2);
     })();
+    // 纯观测收敛曲线（假信号如何自己蒸发）
+    (function(){
+      var O = L.observation; if(!O) return;
+      var tEl=document.getElementById('obsTitle'); if(tEl) tEl.textContent=O.title;
+      var wEl=document.getElementById('obsWhat');
+      if(wEl) wEl.innerHTML=O.what+'　·　窗口 '+O.window+'　·　随机基线 <b>'+O.baseline+'%</b>';
+      var vEl=document.getElementById('obsVerdict'); if(vEl) vEl.textContent=O.verdict;
+      var el=document.getElementById('obsCurve'); if(!el) return;
+      var S=O.series, base=O.baseline;
+      var W=680,H=232,pad={l:48,r:22,t:18,b:36}, ymax=70;
+      function X(n){return pad.l+(n-1)/(S.length-1)*(W-pad.l-pad.r);}
+      function Y(v){return pad.t+(1-v/ymax)*(H-pad.t-pad.b);}
+      var s='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto" role="img" aria-label="命中率随观测期数收敛到随机基线的曲线">';
+      [0,20,40,60].forEach(function(v){
+        s+='<line x1="'+pad.l+'" y1="'+Y(v)+'" x2="'+(W-pad.r)+'" y2="'+Y(v)+'" style="stroke:var(--line)" stroke-width="1"/>';
+        s+='<text x="'+(pad.l-9)+'" y="'+(Y(v)+4)+'" text-anchor="end" font-size="11" style="fill:var(--sub)">'+v+'%</text>';
+      });
+      s+='<line x1="'+pad.l+'" y1="'+Y(base)+'" x2="'+(W-pad.r)+'" y2="'+Y(base)+'" stroke="#1a9d5a" stroke-width="2" stroke-dasharray="6 5"/>';
+      s+='<text x="'+(W-pad.r)+'" y="'+(Y(base)-11)+'" text-anchor="end" font-size="11.5" font-weight="700" style="fill:#1a9d5a;stroke:var(--panel);stroke-width:3.5;paint-order:stroke">随机基线 '+base+'%</text>';
+      s+='<polyline points="'+S.map(function(d){return X(d.n)+','+Y(d.rate);}).join(' ')+'" fill="none" style="stroke:var(--brand)" stroke-width="2.5" stroke-linejoin="round"/>';
+      S.forEach(function(d){
+        s+='<circle cx="'+X(d.n)+'" cy="'+Y(d.rate)+'" r="4" fill="'+(d.rate>=55?'#d83333':'#1f6feb')+'" stroke="var(--panel)" stroke-width="2"/>';
+        s+='<text x="'+X(d.n)+'" y="'+(H-pad.b+17)+'" text-anchor="middle" font-size="10.5" style="fill:var(--sub)">'+d.n+'</text>';
+      });
+      var mx=S.reduce(function(a,b){return b.rate>a.rate?b:a;});
+      s+='<text x="'+X(mx.n)+'" y="'+(Y(mx.rate)-13)+'" text-anchor="middle" font-size="12" font-weight="700" style="fill:#d83333;stroke:var(--panel);stroke-width:3.5;paint-order:stroke">'+mx.rate.toFixed(1)+'%</text>';
+      s+='<text x="'+X(10)+'" y="'+(Y(30)+22)+'" text-anchor="end" font-size="12" font-weight="700" style="fill:var(--brand);stroke:var(--panel);stroke-width:3.5;paint-order:stroke">30.0%</text>';
+      s+='<text x="'+(pad.l+(W-pad.l-pad.r)/2)+'" y="'+(H-3)+'" text-anchor="middle" font-size="11" style="fill:var(--sub)">累计观测期数（公式全程未改动，变的只有样本量）</text>';
+      s+='</svg>';
+      el.innerHTML=s;
+    })();
+
     // 表格
     var rows=L.rows, tbody=document.getElementById('tbodyL');
     if(!tbody) return;

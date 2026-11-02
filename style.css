@@ -236,6 +236,8 @@ input.search{width:100%;padding:10px 14px;border:1px solid var(--line);border-ra
 
 /* ===== 名词悬浮解释（tooltip） ===== */
 .term{color:var(--brand);border-bottom:1px dashed var(--brand);cursor:help}
+/* hero 是深蓝底，蓝色术语字几乎不可见，改用亮色 */
+.hero .term{color:#9dc4ff;border-bottom-color:#9dc4ff}
 #tip{position:fixed;z-index:9999;max-width:280px;background:#1f2937;color:#fff;font-size:13px;line-height:1.6;padding:10px 13px;border-radius:10px;box-shadow:0 8px 26px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:opacity .12s;font-weight:400}
 #tip.show{opacity:1}
 @media(max-width:880px){#tip{max-width:84vw}}
